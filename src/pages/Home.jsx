@@ -238,6 +238,12 @@ const Home = () => {
     e.target.onerror = null; // منع التكرار
   }, []);
 
+  const handleHeroImageError = useCallback((e) => {
+    console.error('Failed to load hero image:', e);
+    // Fallback to gradient background if image fails to load
+    e.target.style.display = 'none';
+  }, []);
+
   // Structured Data for SEO
   const structuredData = {
     '@context': 'https://schema.org',
@@ -265,48 +271,91 @@ const Home = () => {
         {JSON.stringify(structuredData)}
       </script>
 
-      {/* Hero Section */}
+      {/* Enhanced Hero Section with Background Image */}
       <section
-        className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900"
         role="banner"
         aria-label="الصفحة الرئيسية"
       >
-        <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[size:40px_40px]" aria-hidden="true" />
+        {/* Background Image with Optimized Loading */}
+        <div className="absolute inset-0 w-full h-full">
+          <Suspense fallback={
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700" />
+          }>
+            <OptimizedImage
+              src="/assets/Home/home-1.jpg.jpg"
+              alt="بناء وتطوير عقاري متكامل"
+              fill
+              className="w-full h-full object-cover"
+              priority
+              onError={handleHeroImageError}
+              quality={85}
+            />
+          </Suspense>
+          
+          {/* Dark Overlay for Better Text Contrast */}
+          <div 
+            className="absolute inset-0 bg-black/60" 
+            aria-hidden="true"
+          />
+          
+          {/* Subtle Pattern Overlay */}
+          <div 
+            className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:20px_20px] opacity-10" 
+            aria-hidden="true"
+          />
+        </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+        {/* Hero Content */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white z-10">
           <motion.div
             initial="initial"
             animate="animate"
             variants={fadeInUp}
             className="max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" itemProp="name">
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+              itemProp="name"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               {content.hero.title}
               <br />
-              <span className="bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">
+              <motion.span 
+                className="bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+              >
                 {content.hero.subtitle}
-              </span>
-            </h1>
+              </motion.span>
+            </motion.h1>
+            
             <motion.p
-              className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed text-blue-100"
+              className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed text-gray-100"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
               itemProp="description"
             >
               {content.hero.description}
             </motion.p>
+            
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
               className="flex flex-col sm:flex-row gap-6 justify-center items-center"
             >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+              >
                 <Link
                   to="/projects"
-                  className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-xl font-semibold hover:bg-yellow-300 transition-colors duration-300 text-lg shadow-lg shadow-yellow-500/25 inline-flex items-center focus:outline-none focus:ring-4 focus:ring-yellow-300 focus:ring-opacity-50"
+                  className="bg-yellow-400 text-blue-900 px-8 py-4 rounded-xl font-semibold hover:bg-yellow-300 transition-all duration-300 text-lg shadow-lg shadow-yellow-500/25 inline-flex items-center focus:outline-none focus:ring-4 focus:ring-yellow-300 focus:ring-opacity-50 border-2 border-yellow-400"
                   aria-label={content.hero.projectsBtn}
                   prefetch="intent"
                 >
@@ -314,10 +363,14 @@ const Home = () => {
                   <HomeIcons.Arrow className={`w-5 h-5 ${isArabic ? 'mr-2 rotate-180' : 'ml-2'}`} aria-hidden="true" />
                 </Link>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+              >
                 <Link
                   to="/contact"
-                  className="border-2 border-white/80 text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-blue-900 backdrop-blur-sm transition-all duration-300 text-lg inline-flex items-center focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50"
+                  className="border-2 border-white/80 text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-blue-900 backdrop-blur-sm transition-all duration-300 text-lg inline-flex items-center focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50 bg-white/10"
                   aria-label={content.hero.contactBtn}
                   prefetch="intent"
                 >
@@ -330,11 +383,11 @@ const Home = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
           <motion.div
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center"
+            className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center backdrop-blur-sm"
             aria-hidden="true"
           >
             <div className="w-1 h-3 bg-white/70 rounded-full mt-2" />
@@ -342,6 +395,7 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Rest of the sections remain exactly the same */}
       {/* Stats Section */}
       <section className="py-16 lg:py-20 bg-white" aria-labelledby="stats-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

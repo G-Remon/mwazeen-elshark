@@ -1,4 +1,13 @@
 // projectsData.js
+
+// Simple image path helper for Vercel deployment
+const getImagePath = (filename) => {
+  // Remove any leading/trailing whitespace
+  const cleaned = filename.trim();
+  // Ensure path starts with / and return
+  return cleaned.startsWith('/') ? cleaned : `/${cleaned}`;
+};
+
 export const projectsData = [
   {
     id: 1,
@@ -65,28 +74,28 @@ export const projectsData = [
     },
     images: [
       {
-        src: '/src/assets/Projects/مشروع معارض العجلان/1.jpg',
+        src: getImagePath('/assets/Projects/مشروع معارض العجلان/1.jpg'),
         alt: {
           ar: 'الواجهة الرئيسية لمعارض العجلان',
           en: 'Main facade of Al-Ajlan Exhibitions'
         }
       },
       {
-        src: ' /src/assets/Projects/مشروع معارض العجلان/2.jpg',
+        src: getImagePath('/assets/Projects/مشروع معارض العجلان/2.jpg'),
         alt: {
           ar: 'صالة العرض الرئيسية',
           en: 'Main exhibition hall'
         }
       },
       {
-        src: ' /src/assets/Projects/مشروع معارض العجلان/3.jpg',
+        src: getImagePath('/assets/Projects/مشروع معارض العجلان/3.jpg'),
         alt: {
           ar: 'منطقة الاستقبال واللوبي',
           en: 'Reception and lobby area'
         }
       },
       {
-        src: '/src/assets/Projects/مشروع معارض العجلان/4.jpg',
+        src: getImagePath('/assets/Projects/مشروع معارض العجلان/4.jpg'),
         alt: {
           ar: 'التفاصيل المعمارية الخارجية',
           en: 'External architectural details'
@@ -159,29 +168,30 @@ export const projectsData = [
     },
     images: [
       {
-        src: '/src/assets/Projects/مشروع رسن فليج فرسان 2 ( تحت الانشاء )/1.jpg',
+        src: getImagePath('/assets/Projects/rasan-faleg-2/1.jpg'),
         alt: {
-          ar: '   ',
+          ar: 'نموذج المشروع والتصميم العام',
           en: 'Project model and overall design'
         }
       },
       {
-        src: '/src/assets/Projects/مشروع رسن فليج فرسان 2 ( تحت الانشاء )/2.jpg',
+        src: getImagePath('/assets/Projects/rasan-faleg-2/2.jpg'),
         alt: {
+          ar: 'مراحل البناء والإنشاء',
           en: 'Construction and building phases'
         }
       },
       {
-        src: ' /src/assets/Projects/مشروع رسن فليج فرسان 2 ( تحت الانشاء )/3.jpg',
+        src: getImagePath('/assets/Projects/rasan-faleg-2/3.jpg'),
         alt: {
-          ar: '  ',
+          ar: 'الهيكل الإنشائي المتطور',
           en: 'Advanced structural framework'
         }
       },
       {
-        src: ' /src/assets/Projects/مشروع رسن فليج فرسان 2 ( تحت الانشاء )/4.jpg',
+        src: getImagePath('/assets/Projects/rasan-faleg-2/4.jpg'),
         alt: {
-          ar: '  ',
+          ar: 'البنية التحتية والمرافق',
           en: 'Infrastructure and facilities'
         }
       }
@@ -252,30 +262,30 @@ export const projectsData = [
     },
     images: [
       {
-        src: '/src/assets/Projects/مشروع العماير مرسية ( تحت الانشاء)/1.jpg',
+        src: getImagePath('/assets/Projects/amayer-murcia/1.jpg'),
         alt: {
-          ar: '  ',
+          ar: 'التصميم المعماري الخارجي',
           en: 'External architectural design'
         }
       },
       {
-        src: '/src/assets/Projects/مشروع العماير مرسية ( تحت الانشاء)/2.jpg',
+        src: getImagePath('/assets/Projects/amayer-murcia/2.jpg'),
         alt: {
-          ar: '  ',
+          ar: 'الأعمال الإنشائية',
           en: 'Structural works'
         }
       },
       {
-        src: '/src/assets/Projects/مشروع العماير مرسية ( تحت الانشاء)/3.jpg',
+        src: getImagePath('/assets/Projects/amayer-murcia/3.jpg'),
         alt: {
-          ar: '  ',
+          ar: 'تخطيط الوحدات السكنية',
           en: 'Residential units planning'
         }
       },
       {
-        src: ' /src/assets/Projects/مشروع العماير مرسية ( تحت الانشاء)/4.jpg',
+        src: getImagePath('/assets/Projects/amayer-murcia/4.jpg'),
         alt: {
-          ar: '  ',
+          ar: 'المرافق والخدمات المشتركة',
           en: 'Common facilities and services'
         }
       }
@@ -346,28 +356,28 @@ export const projectsData = [
     },
     images: [
       {
-        src: '/assets/projects/amariyah-1.jpg',
+        src: getImagePath('/assets/Projects/amariyah/1.jpg'),
         alt: {
           ar: 'التصميم المستدام والمساحات الخضراء',
           en: 'Sustainable design and green spaces'
         }
       },
       {
-        src: '/assets/projects/amariyah-2.jpg',
+        src: getImagePath('assets/projects/amariyah/2.jpg'),
         alt: {
           ar: 'أنظمة الطاقة الشمسية',
           en: 'Solar energy systems'
         }
       },
       {
-        src: '/assets/projects/amariyah-3.jpg',
+        src: getImagePath('assets/projects/amariyah/3.jpg'),
         alt: {
           ar: 'أعمال البناء المستدام',
           en: 'Sustainable construction works'
         }
       },
       {
-        src: '/assets/projects/amariyah-4.jpg',
+        src: getImagePath('assets/projects/amariyah/4.jpg'),
         alt: {
           ar: 'التفاصيل المعمارية الخضراء',
           en: 'Green architectural details'
@@ -442,30 +452,30 @@ export const projectsData = [
     },
     images: [
       {
-        src: '/src/assets/Projects/فرسان 1 مشروع انشاء 24 فيلا/3 (2).jpg',
+        src: getImagePath('/assets/Projects/fursan-1/1.jpg'),
         alt: {
-          ar: '  ',
+          ar: 'الواجهة الرئيسية للفلل',
           en: 'Main villas facade'
         }
       },
       {
-        src: '/src/assets/Projects/فرسان 1 مشروع انشاء 24 فيلا/2.jpg',
+        src: getImagePath('/assets/Projects/fursan-1/2.jpg'),
         alt: {
-          ar: '  ',
+          ar: 'التصميم الداخلي الفاخر',
           en: 'Luxurious interior design'
         }
       },
       {
-        src: '/src/assets/Projects/فرسان 1 مشروع انشاء 24 فيلا/1.jpg',
+        src: getImagePath('/assets/Projects/fursan-1/3.jpg'),
         alt: {
-          ar: '  ',
+          ar: 'المساحات الخضراء والحدائق',
           en: 'Green spaces and gardens'
         }
       },
       {
-        src: '/src/assets/Projects/فرسان 1 مشروع انشاء 24 فيلا/4.jpg',
+        src: getImagePath('/assets/Projects/fursan-1/4.jpg'),
         alt: {
-          ar: '  ',
+          ar: 'المرافق الترفيهية المتكاملة',
           en: 'Integrated recreational facilities'
         }
       }

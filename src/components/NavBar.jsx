@@ -1,13 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
-import logo from '../assets/logo2.png';
+import logo from '/assets/logo2.png';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { language, toggleLanguage, isArabic } = useLanguage();
+
+  const isHomePage = location.pathname === '/';
+
+  // تأثير التمرير لتغيير مظهر الناف بار
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navigation = [
     {
@@ -19,7 +36,7 @@ const NavBar = () => {
       href: '/about'
     },
     {
-      name: { ar: 'خدماتنا', en: 'Services' }, // أضف هذا
+      name: { ar: 'خدماتنا', en: 'Services' },
       href: '/services'
     },
     {
@@ -27,7 +44,7 @@ const NavBar = () => {
       href: '/projects'
     },
     {
-      name: { ar: 'طلب عرض السعر', en: 'Get Quote' }, // أضف هذا
+      name: { ar: 'طلب عرض السعر', en: 'Get Quote' },
       href: '/price-request'
     },
     {
@@ -36,9 +53,34 @@ const NavBar = () => {
     },
   ];
 
+  // تحديد أنماط الناف بار بناءً على الصفحة والتأثير
+  const navStyles = {
+    background: isHomePage && !isScrolled 
+      ? 'rgba(255, 255, 255, 0.1)' 
+      : 'rgba(255, 255, 255, 0.95)',
+    backdropFilter: isHomePage && !isScrolled 
+      ? 'blur(10px)' 
+      : 'blur(8px)',
+    borderBottom: isHomePage && !isScrolled 
+      ? '1px solid rgba(255, 255, 255, 0.2)' 
+      : '1px solid rgba(0, 0, 0, 0.1)',
+    boxShadow: isHomePage && !isScrolled 
+      ? 'none' 
+      : '0 4px 20px rgba(0, 0, 0, 0.1)'
+  };
+
+  const textColor = isHomePage && !isScrolled ? 'text-white' : 'text-gray-800';
+  const hoverColor = isHomePage && !isScrolled ? 'hover:text-yellow-300' : 'hover:text-primary';
+  const activeColor = isHomePage && !isScrolled ? 'text-yellow-300' : 'text-primary';
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50">
+    <motion.nav 
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+      style={navStyles}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20">
           {/* اللوجو */}
@@ -56,10 +98,10 @@ const NavBar = () => {
                 />
               </motion.div>
               <div className="flex flex-col">
-                <span className="text-base sm:text-lg md:text-2xl font-bold text-primary leading-tight tracking-tight">
+                <span className={`text-base sm:text-lg md:text-2xl font-bold leading-tight tracking-tight ${textColor}`}>
                   {isArabic ? 'موازين الشرق' : 'Mawazin Al-Sharq'}
                 </span>
-                <span className="text-xs sm:text-sm text-gray-500 font-medium">
+                <span className={`text-xs sm:text-sm font-medium ${isHomePage && !isScrolled ? 'text-gray-200' : 'text-gray-500'}`}>
                   {isArabic ? 'للمقاولات العامة' : 'General Contracting'}
                 </span>
               </div>
@@ -72,10 +114,11 @@ const NavBar = () => {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`px-2 xl:px-3 py-2 rounded-md text-xs xl:text-sm font-medium transition-colors duration-200 whitespace-nowrap ${location.pathname === item.href
-                  ? 'text-primary border-b-2 border-accent'
-                  : 'text-gray-700 hover:text-primary'
-                  }`}
+                className={`px-2 xl:px-3 py-2 rounded-md text-xs xl:text-sm font-medium transition-colors duration-200 whitespace-nowrap ${
+                  location.pathname === item.href
+                    ? `${activeColor} border-b-2 ${isHomePage && !isScrolled ? 'border-yellow-300' : 'border-accent'}`
+                    : `${textColor} ${hoverColor}`
+                }`}
               >
                 {item.name[language]}
               </Link>
@@ -87,7 +130,11 @@ const NavBar = () => {
             {/* زر تبديل اللغة */}
             <motion.button
               onClick={toggleLanguage}
-              className="flex items-center space-x-1 xl:space-x-2 px-2 xl:px-3 py-2 rounded-md text-xs xl:text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-100 transition-colors duration-200 border border-gray-200 whitespace-nowrap"
+              className={`flex items-center space-x-1 xl:space-x-2 px-2 xl:px-3 py-2 rounded-md text-xs xl:text-sm font-medium transition-colors duration-200 border whitespace-nowrap ${
+                isHomePage && !isScrolled 
+                  ? 'text-white border-white/50 hover:bg-white/20 hover:text-white' 
+                  : 'text-gray-700 border-gray-200 hover:text-primary hover:bg-gray-100'
+              }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -115,12 +162,20 @@ const NavBar = () => {
             {/* زر تبديل اللغة للجوال */}
             <motion.button
               onClick={toggleLanguage}
-              className="relative flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold text-gray-700 bg-gradient-to-r from-gray-50 to-gray-100 hover:from-primary hover:to-blue-700 hover:text-white transition-all duration-300 border border-gray-200 hover:border-primary shadow-sm overflow-hidden group"
+              className={`relative flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all duration-300 border shadow-sm overflow-hidden group ${
+                isHomePage && !isScrolled
+                  ? 'text-white border-white/50 bg-white/10 hover:bg-white/20'
+                  : 'text-gray-700 bg-gradient-to-r from-gray-50 to-gray-100 border-gray-200 hover:from-primary hover:to-blue-700 hover:text-white'
+              }`}
               whileTap={{ scale: 0.95 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-primary to-blue-700 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              {!isHomePage || isScrolled ? (
+                <div className="absolute inset-0 bg-gradient-to-r from-primary to-blue-700 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              ) : null}
               <svg
-                className="w-4 h-4 relative z-10 group-hover:rotate-12 transition-transform duration-300"
+                className={`w-4 h-4 relative z-10 group-hover:rotate-12 transition-transform duration-300 ${
+                  isHomePage && !isScrolled ? '' : 'group-hover:text-white'
+                }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -139,16 +194,32 @@ const NavBar = () => {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-lg text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary transition-colors duration-200"
+              className={`inline-flex items-center justify-center p-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-inset ${
+                isHomePage && !isScrolled
+                  ? 'text-white hover:bg-white/20 focus:ring-white/50'
+                  : 'text-gray-700 hover:text-primary hover:bg-gray-100 focus:ring-primary'
+              }`}
               aria-expanded="false"
             >
               <span className="sr-only">
                 {isArabic ? 'فتح القائمة' : 'Open menu'}
               </span>
               <div className="w-6 h-6 flex flex-col justify-center items-center">
-                <span className={`block h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${isOpen ? 'rotate-45 translate-y-0.5' : '-translate-y-1.5'}`}></span>
-                <span className={`block h-0.5 w-6 bg-current transition duration-300 ease-in-out ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-                <span className={`block h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${isOpen ? '-rotate-45 -translate-y-0.5' : 'translate-y-1.5'}`}></span>
+                <span 
+                  className={`block h-0.5 w-6 transform transition duration-300 ease-in-out ${
+                    isOpen ? 'rotate-45 translate-y-0.5' : '-translate-y-1.5'
+                  } ${isHomePage && !isScrolled ? 'bg-white' : 'bg-current'}`}
+                ></span>
+                <span 
+                  className={`block h-0.5 w-6 transition duration-300 ease-in-out ${
+                    isOpen ? 'opacity-0' : 'opacity-100'
+                  } ${isHomePage && !isScrolled ? 'bg-white' : 'bg-current'}`}
+                ></span>
+                <span 
+                  className={`block h-0.5 w-6 transform transition duration-300 ease-in-out ${
+                    isOpen ? '-rotate-45 -translate-y-0.5' : 'translate-y-1.5'
+                  } ${isHomePage && !isScrolled ? 'bg-white' : 'bg-current'}`}
+                ></span>
               </div>
             </button>
           </div>
@@ -160,17 +231,26 @@ const NavBar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden border-t border-gray-200"
+            className={`lg:hidden border-t ${
+              isHomePage && !isScrolled ? 'border-white/20' : 'border-gray-200'
+            }`}
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <div className={`px-2 pt-2 pb-3 space-y-1 sm:px-3 ${
+              isHomePage && !isScrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-white'
+            }`}>
               {navigation.map((item) => (
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`block px-3 py-2 rounded-md text-sm sm:text-base font-medium ${location.pathname === item.href
-                    ? 'text-primary bg-blue-50'
-                    : 'text-gray-700 hover:text-primary hover:bg-gray-50'
-                    }`}
+                  className={`block px-3 py-2 rounded-md text-sm sm:text-base font-medium transition-colors ${
+                    location.pathname === item.href
+                      ? isHomePage && !isScrolled
+                        ? 'text-yellow-300 bg-white/10'
+                        : 'text-primary bg-blue-50'
+                      : isHomePage && !isScrolled
+                        ? 'text-gray-200 hover:text-white hover:bg-white/10'
+                        : 'text-gray-700 hover:text-primary hover:bg-gray-50'
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name[language]}
@@ -178,17 +258,27 @@ const NavBar = () => {
               ))}
 
               {/* قسم تبديل اللغة في القائمة المنزلقة */}
-              <div className="px-3 py-2 mt-2 border-t border-gray-200">
+              <div className={`px-3 py-2 mt-2 border-t ${
+                isHomePage && !isScrolled ? 'border-white/20' : 'border-gray-200'
+              }`}>
                 <button
                   onClick={() => {
                     toggleLanguage();
                     setIsOpen(false);
                   }}
-                  className="relative flex items-center gap-3 w-full px-4 py-3 rounded-lg text-sm sm:text-base font-semibold text-gray-700 bg-gradient-to-r from-gray-50 to-gray-100 hover:from-primary hover:to-blue-700 hover:text-white transition-all duration-300 border border-gray-200 hover:border-primary shadow-sm overflow-hidden group"
+                  className={`relative flex items-center gap-3 w-full px-4 py-3 rounded-lg text-sm sm:text-base font-semibold transition-all duration-300 border shadow-sm overflow-hidden group ${
+                    isHomePage && !isScrolled
+                      ? 'text-white border-white/50 bg-white/10 hover:bg-white/20'
+                      : 'text-gray-700 bg-gradient-to-r from-gray-50 to-gray-100 border-gray-200 hover:from-primary hover:to-blue-700 hover:text-white'
+                  }`}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary to-blue-700 translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                  {!isHomePage || isScrolled ? (
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary to-blue-700 translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                  ) : null}
                   <svg
-                    className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300"
+                    className={`w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300 ${
+                      isHomePage && !isScrolled ? '' : 'group-hover:text-white'
+                    }`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -209,7 +299,7 @@ const NavBar = () => {
           </motion.div>
         )}
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 
