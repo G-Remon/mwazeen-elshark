@@ -9,15 +9,15 @@ export const useProjectData = (id) => {
     try {
       setLoading(true);
       setError(null);
-      
+
       // استخدام dynamic import مع error handling
       const { projectsData } = await import('../data/ProjectData.js');
       const foundProject = projectsData.find(project => project.id === parseInt(id));
-      
+
       if (!foundProject) {
         throw new Error('Project not found');
       }
-      
+
       setProjectData(foundProject);
     } catch (err) {
       setError(err.message);
@@ -29,7 +29,7 @@ export const useProjectData = (id) => {
 
   useEffect(() => {
     let mounted = true;
-    
+
     if (mounted) {
       loadProjectData();
     }
