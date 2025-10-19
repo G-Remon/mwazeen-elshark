@@ -576,7 +576,7 @@ const Contact = () => {
               </motion.div>
 
               {/* CTA Card */}
-              <motion.div
+              {/* <motion.div
                 variants={itemVariants}
                 whileHover="hover"
                 className="bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-xl md:rounded-2xl p-6 md:p-8 shadow-xl focus-within:ring-4 focus-within:ring-blue-300"
@@ -600,7 +600,7 @@ const Contact = () => {
                     <ContactIcons.Arrow className={`h-4 md:h-5 w-4 md:w-5 ${isArabic ? 'mr-2 rotate-180' : 'ml-2'}`} />
                   </motion.button>
                 </div>
-              </motion.div>
+              </motion.div> */}
             </div>
           </motion.div>
         </div>

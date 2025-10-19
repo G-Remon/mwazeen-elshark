@@ -50,7 +50,7 @@ function App() {
       <Router>
         <div className="min-h-screen bg-light flex flex-col">
           <NavBar />
-          <main className="flex-grow">
+          <main className="flex-grow ">
             <OptimizedSuspense>
               <Routes>
                 <Route path="/" element={<Home />} />
