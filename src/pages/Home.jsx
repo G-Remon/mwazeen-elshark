@@ -283,7 +283,7 @@ const Home = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700" />
           }>
             <OptimizedImage
-              src="/assets/Home/home-1.jpg.jpg"
+              src="/assets/Home/home-1.jpg.webp"
               alt="بناء وتطوير عقاري متكامل"
               fill
               className="w-full h-full object-cover"
