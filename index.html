@@ -2,10 +2,25 @@
 <html lang="ar-SA" dir="rtl">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="application-name" content="موازين الشرق للمقاولات العامة">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <!-- PWA Meta Tags -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="موازين الشرق">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   
   <!-- Canonical URL -->
   <link rel="canonical" href="https://mawazen-alsharq.com" />
+  
+  <!-- hreflang for language targeting -->
+  <link rel="alternate" href="https://mawazen-alsharq.com" hreflang="ar-SA">
+  <link rel="alternate" href="https://mawazen-alsharq.com/en" hreflang="en">
+  <link rel="alternate" href="https://mawazen-alsharq.com" hreflang="x-default">
   
   <!-- Favicons in multiple formats -->
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
@@ -15,29 +30,41 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   
-  <!-- Preload critical resources -->
-  <link rel="preload" href="/hero-image.webp" as="image" type="image/webp">
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" as="style">
-  <link rel="preload" href="/src/main.jsx" as="script">
+  <!-- DNS prefetch for external domains -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   
   <!-- Preconnect to external domains -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
-  <!-- CSS with fallback -->
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Preload critical resources -->
+  <link rel="preload" href="/hero-image.webp" as="image" type="image/webp">
+  <link rel="preload" as="image" href="/assets/logo2.png" type="image/png">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Prefetch non-critical resources -->
+  <link rel="prefetch" href="/assets/next-section-image.webp" as="image">
+  
+  <!-- Fonts with display=swap -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" media="all">
   
   <!-- Essential Meta Tags -->
   <title>موازين الشرق للمقاولات العامة | مقاولات بناء وتشطيب في السعودية</title>
-  <meta name="description" content="شركة موازين الشرق للمقاولات العامة - متخصصون في البناء والتشطيب بجودة عالية ودقة في التنفيذ. مشاريع سكنية وتجارية في جميع أنحاء المملكة">
+  <meta name="description" content="موازين الشرق للمقاولات العامة - متخصصون في البناء والتشطيب بجودة عالية. مشاريع سكنية وتجارية في جميع أنحاء المملكة العربية السعودية.">
   <meta name="keywords" content="مقاولات, بناء, تشطيب, مقاول عام, مشاريع سكنية, مشاريع تجارية, السعودية, موازين الشرق">
   <meta name="author" content="موازين الشرق للمقاولات العامة">
   <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#c29b40">
+  <meta name="format-detection" content="telephone=no">
   
   <!-- Open Graph -->
   <meta property="og:title" content="موازين الشرق للمقاولات العامة | مقاولات بناء وتشطيب في السعودية">
-  <meta property="og:description" content="شركة متخصصة في المقاولات العامة والبناء بجودة عالية - مشاريع سكنية وتجارية في جميع أنحاء المملكة">
-  <meta property="og:image" content="/og-image.jpg">
+  <meta property="og:description" content="موازين الشرق للمقاولات العامة - متخصصون في البناء والتشطيب بجودة عالية. مشاريع سكنية وتجارية في جميع أنحاء المملكة.">
+  <meta property="og:image" content="/og-image.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="شعار موازين الشرق للمقاولات العامة">
   <meta property="og:url" content="https://mawazen-alsharq.com">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ar_SA">
@@ -47,27 +74,62 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="موازين الشرق للمقاولات العامة">
   <meta name="twitter:description" content="شركة متخصصة في المقاولات العامة والبناء بجودة عالية">
-  <meta name="twitter:image" content="/twitter-image.jpg">
+  <meta name="twitter:image" content="/twitter-image.webp">
+  <meta name="twitter:image:alt" content="شعار موازين الشرق للمقاولات العامة">
   
-  <!-- Structured Data -->
+  <!-- Unified Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ConstructionBusiness",
-    "name": "موازين الشرق للمقاولات العامة",
-    "description": "شركة متخصصة في المقاولات العامة والبناء والتشطيب في المملكة العربية السعودية",
-    "url": "https://mawazen-alsharq.com",
-    "logo": "https://mawazen-alsharq.com/assets/logo2.png",
-    "telephone": "+966-XXX-XXXX",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "SA",
-      "addressRegion": "المملكة العربية السعودية"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "ConstructionBusiness",
+      "name": "موازين الشرق للمقاولات العامة",
+      "description": "شركة متخصصة في المقاولات العامة والبناء والتشطيب في المملكة العربية السعودية",
+      "url": "https://mawazen-alsharq.com",
+      "logo": "https://mawazen-alsharq.com/assets/logo2.png",
+      "telephone": "+966-XXX-XXXX",
+      "priceRange": "$$",
+      "openingHours": "Sa-Th 08:00-18:00",
+      "hasMap": "https://goo.gl/maps/example-location-link",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "SA",
+        "addressRegion": "المملكة العربية السعودية"
+      },
+      "areaServed": "المملكة العربية السعودية",
+      "serviceType": "مقاولات عامة - بناء - تشطيب",
+      "sameAs": [
+        "https://www.facebook.com/mawazenalsharq",
+        "https://www.instagram.com/mawazenalsharq",
+        "https://www.linkedin.com/company/mawazen-alsharq"
+      ]
     },
-    "areaServed": "المملكة العربية السعودية",
-    "serviceType": "مقاولات عامة - بناء - تشطيب",
-    "sameAs": []
-  }
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "موازين الشرق للمقاولات العامة",
+      "image": "https://mawazen-alsharq.com/assets/logo2.png",
+      "telephone": "+966-XXX-XXXX",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "SA",
+        "addressRegion": "المملكة العربية السعودية"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 24.7136,
+        "longitude": 46.6753
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPoint",
+      "telephone": "+966-XXX-XXXX",
+      "contactType": "customer service",
+      "areaServed": "SA",
+      "availableLanguage": "ar"
+    }
+  ]
   </script>
   
   <!-- Additional performance optimizations -->
@@ -75,43 +137,155 @@
     /* Critical CSS for above-the-fold content */
     body {
       margin: 0;
-      font-family: 'Tajawal', sans-serif;
+      font-family: 'Tajawal', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
     }
     #root {
       min-height: 100vh;
     }
+    
+    /* Fallback font styling for when Tajawal hasn't loaded */
+    .font-loading {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    
+    /* Basic styling for loading state */
+    .loading-placeholder {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333;
+      font-size: 1.2rem;
+    }
+    
+    /* Font face declaration with font-display: swap */
+    @font-face {
+      font-family: 'Tajawal';
+      font-style: normal;
+      font-weight: 300;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1rzaLCr5Ihg.woff2) format('woff2');
+    }
+    
+    @font-face {
+      font-family: 'Tajawal';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzqLCr5Ihg.woff2) format('woff2');
+    }
+    
+    @font-face {
+      font-family: 'Tajawal';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1lz2LCr5Ihg.woff2) format('woff2');
+    }
+    
+    @font-face {
+      font-family: 'Tajawal';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1tzqLCr5Ihg.woff2) format('woff2');
+    }
   </style>
+  
+  <!-- Fallback for users with JavaScript disabled -->
+  <noscript>
+    <style>
+      /* Basic styling for no-JS experience */
+      .no-js-message {
+        padding: 2rem;
+        text-align: center;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+        margin: 2rem;
+      }
+      
+      .no-js-message h1 {
+        color: #c29b40;
+        margin-bottom: 1rem;
+      }
+      
+      .no-js-message p {
+        margin-bottom: 1rem;
+      }
+      
+      .contact-info {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #dee2e6;
+      }
+    </style>
+    
+    <!-- Fallback font loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  </noscript>
 </head>
-<body>
+<body class="font-loading">
   <div id="root">
     <!-- Content will be rendered by React -->
-    <!-- Ensure proper heading structure in your React components: -->
-    <!-- 
-      <h1>موازين الشرق للمقاولات العامة</h1>
-      <h2>خدماتنا</h2>
-      <h3>البناء والتشييد</h3>
-      <h3>التشطيب والديكور</h3>
-      <h2>مشاريعنا</h2>
-      ... etc.
-    -->
+    <!-- Loading placeholder for better perceived performance -->
+    <div class="loading-placeholder">
+      <div>
+        <h1>موازين الشرق للمقاولات العامة</h1>
+        <p>جاري تحميل الموقع...</p>
+      </div>
+    </div>
+    
+    <!-- No-JS fallback content -->
+    <noscript>
+      <div class="no-js-message">
+        <h1>موازين الشرق للمقاولات العامة</h1>
+        <p>للأسف، متصفحك لا يدعم JavaScript أو تم تعطيله.</p>
+        <p>للاستفادة الكاملة من موقعنا، يرجى تمكين JavaScript في متصفحك.</p>
+        
+        <div class="contact-info">
+          <h2>للتواصل معنا:</h2>
+          <p>هاتف: <a href="tel:+966-XXX-XXXX">+966-XXX-XXXX</a></p>
+          <p>البريد الإلكتروني: <a href="mailto:info@mawazen-alsharq.com">info@mawazen-alsharq.com</a></p>
+          <p>ساعات العمل: السبت - الخميس، 8 صباحاً - 6 مساءً</p>
+        </div>
+        
+        <div style="margin-top: 2rem;">
+          <h3>خدماتنا:</h3>
+          <ul>
+            <li>المقاولات العامة</li>
+            <li>البناء والتشييد</li>
+            <li>التشطيب والديكور</li>
+            <li>إدارة المشاريع</li>
+          </ul>
+        </div>
+        
+        <div style="margin-top: 2rem;">
+          <h3>تابعنا على:</h3>
+          <p>
+            <a href="https://www.facebook.com/mawazenalsharq" target="_blank" rel="noopener noreferrer">فيسبوك</a> | 
+            <a href="https://www.instagram.com/mawazenalsharq" target="_blank" rel="noopener noreferrer">إنستغرام</a> | 
+            <a href="https://www.linkedin.com/company/mawazen-alsharq" target="_blank" rel="noopener noreferrer">لينكدإن</a>
+          </p>
+        </div>
+      </div>
+    </noscript>
   </div>
   
-  <script type="module" src="/src/main.jsx"></script>
+  <!-- Deferred script loading -->
+  <script src="/src/main.jsx" type="module" defer></script>
   
-  <!-- Additional structured data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ContactPoint",
-    "telephone": "+966-XXX-XXXX",
-    "contactType": "customer service",
-    "areaServed": "SA",
-    "availableLanguage": "ar"
-  }
-  </script>
-  
-  <!-- Performance monitoring script (optional) -->
+  <!-- Performance monitoring script -->
   <script>
+    // Remove font-loading class once fonts are loaded
+    document.fonts.ready.then(function() {
+      document.body.classList.remove('font-loading');
+    });
+    
     // Lazy load images that are not critical
     document.addEventListener('DOMContentLoaded', function() {
       const lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
@@ -122,6 +296,7 @@
             if (entry.isIntersecting) {
               let lazyImage = entry.target;
               lazyImage.src = lazyImage.dataset.src;
+              lazyImage.srcset = lazyImage.dataset.srcset || '';
               lazyImage.classList.remove('lazy');
               lazyImageObserver.unobserve(lazyImage);
             }
@@ -131,6 +306,56 @@
         lazyImages.forEach(function(lazyImage) {
           lazyImageObserver.observe(lazyImage);
         });
+      } else {
+        // Fallback for browsers without IntersectionObserver
+        lazyImages.forEach(function(lazyImage) {
+          lazyImage.src = lazyImage.dataset.src;
+          lazyImage.srcset = lazyImage.dataset.srcset || '';
+          lazyImage.classList.remove('lazy');
+        });
+      }
+    });
+    
+    // Performance monitoring
+    window.addEventListener('load', function() {
+      // Remove loading placeholder when React app is ready
+      const loadingPlaceholder = document.querySelector('.loading-placeholder');
+      if (loadingPlaceholder) {
+        setTimeout(function() {
+          loadingPlaceholder.style.display = 'none';
+        }, 500);
+      }
+      
+      // Send performance metrics to analytics (if implemented)
+      if ('performance' in window) {
+        const perfData = window.performance.timing;
+        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+        const domReadyTime = perfData.domContentLoadedEventEnd - perfData.navigationStart;
+        
+        // You can send these metrics to your analytics service
+        console.log('Page Load Time:', pageLoadTime, 'ms');
+        console.log('DOM Ready Time:', domReadyTime, 'ms');
+        
+        // Monitor Core Web Vitals
+        if ('getEntriesByType' in performance) {
+          const largestContentfulPaint = performance.getEntriesByType('largest-contentful-paint');
+          const cumulativeLayoutShift = performance.getEntriesByType('layout-shift');
+          
+          if (largestContentfulPaint.length > 0) {
+            const lcp = largestContentfulPaint[largestContentfulPaint.length - 1];
+            console.log('LCP:', lcp.startTime, 'ms');
+          }
+          
+          if (cumulativeLayoutShift.length > 0) {
+            let cls = 0;
+            cumulativeLayoutShift.forEach(entry => {
+              if (!entry.hadRecentInput) {
+                cls += entry.value;
+              }
+            });
+            console.log('CLS:', cls);
+          }
+        }
       }
     });
   </script>
