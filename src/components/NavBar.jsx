@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
-import logo from '/assets/logo2.png';
+import logo from '/assets/logo2.webp';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);

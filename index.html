@@ -1,416 +1,138 @@
 <!doctype html>
 <html lang="ar-SA" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
-  
-  <!-- Essential Meta Tags -->
-  <title>موازين الشرق للمقاولات | بناء وتشطيب السعودية</title>
-  <meta name="description" content="موازين الشرق للمقاولات - متخصصون بالبناء والتشطيب بجودة عالية. مشاريع سكنية وتجارية بالمملكة. اتصل الآن للحصول على استشارة مجانية.">
-  <meta name="keywords" content="مقاولات, بناء, تشطيب, شركات مقاولات, السعودية, الرياض, مشاريع سكنية, تشييد, ديكور, مقاول سعودي">
-  <meta name="author" content="Mawazen AlSharq General Contracting">
-  <meta name="subject" content="مقاولات عامة وتشطيب في السعودية">
-  
-  <!-- Language & Region Meta Tags -->
-  <meta name="language" content="ar">
-  <meta name="geo.region" content="SA">
-  <meta name="geo.placename" content="Saudi Arabia">
-  <meta name="distribution" content="global">
-  <meta name="rating" content="General">
-  <meta name="generator" content="Vite + React">
-  
-  <!-- Cache Control -->
-  <meta http-equiv="Cache-Control" content="public, max-age=31536000">
-  
-  <!-- Robots & Search Engine Tags -->
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="googlebot" content="index,follow">
-  <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://mawazen-alsharq.com">
+  <link rel="canonical" href="https://mawazen-alsharq.com" />
   
-  <!-- Sitemap -->
-  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-  
-  <!-- hreflang -->
-  <link rel="alternate" href="https://mawazen-alsharq.com" hreflang="ar-SA">
-  <link rel="alternate" href="https://mawazen-alsharq.com/en" hreflang="en">
-  <link rel="alternate" href="https://mawazen-alsharq.com" hreflang="x-default">
-  
-  <!-- DNS Prefetch & Preconnect -->
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
-  <!-- Preload Critical Resources -->
-  <link rel="preload" href="/assets/logo2.webp" as="image" type="image/webp" fetchpriority="high">
-  <link rel="preload" href="/assets/hero-image.webp" as="image" type="image/webp" fetchpriority="high">
-  <link rel="preload" href="https://fonts.gstatic.com/s/tajawal/v9/Iura6YBj_oCad4k1nzqLCr5Ihg.woff2" as="font" type="font/woff2" crossorigin>
-  
-  <!-- Fonts - Optimized with display=swap -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet"></noscript>
-  
-  <!-- Favicons -->
-  <link rel="icon" type="image/svg+xml" href="/assets/logo2.svg">
+  <!-- Favicons in multiple formats -->
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo2.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   
-  <!-- PWA & Mobile Meta Tags -->
-  <meta name="theme-color" content="#c29b40">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="موازين الشرق">
-  <meta name="format-detection" content="telephone=no">
+  <!-- Preload critical resources -->
+  <link rel="preload" href="/hero-image.webp" as="image" type="image/webp">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" as="style">
+  <link rel="preload" href="/src/main.jsx" as="script">
   
-  <!-- Security -->
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
-  <!-- Open Graph - Enhanced -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="موازين الشرق للمقاولات العامة">
-  <meta property="og:title" content="موازين الشرق للمقاولات | بناء وتشطيب السعودية">
-  <meta property="og:description" content="موازين الشرق للمقاولات - متخصصون بالبناء والتشطيب بجودة عالية. مشاريع سكنية وتجارية بالمملكة.">
+  <!-- CSS with fallback -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Essential Meta Tags -->
+  <title>موازين الشرق للمقاولات العامة | مقاولات بناء وتشطيب في السعودية</title>
+  <meta name="description" content="شركة موازين الشرق للمقاولات العامة - متخصصون في البناء والتشطيب بجودة عالية ودقة في التنفيذ. مشاريع سكنية وتجارية في جميع أنحاء المملكة">
+  <meta name="keywords" content="مقاولات, بناء, تشطيب, مقاول عام, مشاريع سكنية, مشاريع تجارية, السعودية, موازين الشرق">
+  <meta name="author" content="موازين الشرق للمقاولات العامة">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="موازين الشرق للمقاولات العامة | مقاولات بناء وتشطيب في السعودية">
+  <meta property="og:description" content="شركة متخصصة في المقاولات العامة والبناء بجودة عالية - مشاريع سكنية وتجارية في جميع أنحاء المملكة">
+  <meta property="og:image" content="/og-image.jpg">
   <meta property="og:url" content="https://mawazen-alsharq.com">
-  <meta property="og:image" content="https://mawazen-alsharq.com/assets/og-image.webp">
-  <meta property="og:image:secure_url" content="https://mawazen-alsharq.com/assets/og-image.webp">
-  <meta property="og:image:type" content="image/webp">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="موازين الشرق للمقاولات العامة - شركة مقاولات رائدة في السعودية">
+  <meta property="og:type" content="website">
   <meta property="og:locale" content="ar_SA">
-  <meta property="og:updated_time" content="2025-10-22T00:00:00+03:00">
+  <meta property="og:site_name" content="موازين الشرق للمقاولات العامة">
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@mawazenalsharq">
-  <meta name="twitter:title" content="موازين الشرق للمقاولات | بناء وتشطيب السعودية">
+  <meta name="twitter:title" content="موازين الشرق للمقاولات العامة">
   <meta name="twitter:description" content="شركة متخصصة في المقاولات العامة والبناء بجودة عالية">
-  <meta name="twitter:image" content="https://mawazen-alsharq.com/assets/twitter-image.webp">
-  <meta name="twitter:image:alt" content="موازين الشرق للمقاولات العامة">
+  <meta name="twitter:image" content="/twitter-image.jpg">
   
-  <!-- Comprehensive Structured Data -->
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://mawazen-alsharq.com/#organization",
-        "name": "موازين الشرق للمقاولات العامة",
-        "alternateName": "Mawazen AlSharq General Contracting",
-        "url": "https://mawazen-alsharq.com",
-        "logo": {
-          "@type": "ImageObject",
-          "@id": "https://mawazen-alsharq.com/#logo",
-          "url": "https://mawazen-alsharq.com/assets/logo2.webp",
-          "contentUrl": "https://mawazen-alsharq.com/assets/logo2.webp",
-          "width": 600,
-          "height": 600,
-          "caption": "موازين الشرق للمقاولات العامة"
-        },
-        "image": {
-          "@id": "https://mawazen-alsharq.com/#logo"
-        },
-        "sameAs": [
-          "https://www.facebook.com/mawazenalsharq",
-          "https://www.instagram.com/mawazenalsharq",
-          "https://twitter.com/mawazenalsharq",
-          "https://www.linkedin.com/company/mawazen-alsharq"
-        ],
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+966-XXX-XXXX",
-          "contactType": "customer service",
-          "email": "info@mawazen-alsharq.com",
-          "areaServed": "SA",
-          "availableLanguage": ["ar", "en"],
-          "contactOption": "TollFree"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "127",
-          "bestRating": "5",
-          "worstRating": "1"
-        }
-      },
-      {
-        "@type": "LocalBusiness",
-        "@id": "https://mawazen-alsharq.com/#localbusiness",
-        "name": "موازين الشرق للمقاولات العامة",
-        "description": "شركة متخصصة في المقاولات العامة والبناء والتشطيب في المملكة العربية السعودية",
-        "url": "https://mawazen-alsharq.com",
-        "telephone": "+966-XXX-XXXX",
-        "email": "info@mawazen-alsharq.com",
-        "priceRange": "$$-$$$",
-        "image": "https://mawazen-alsharq.com/assets/logo2.webp",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "SA",
-          "addressRegion": "الرياض",
-          "addressLocality": "الرياض"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 24.7136,
-          "longitude": 46.6753
-        },
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
-            "opens": "08:00",
-            "closes": "18:00"
-          }
-        ],
-        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
-        "currenciesAccepted": "SAR"
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://mawazen-alsharq.com/#website",
-        "url": "https://mawazen-alsharq.com",
-        "name": "موازين الشرق للمقاولات العامة",
-        "description": "شركة متخصصة في المقاولات العامة والبناء والتشطيب",
-        "publisher": {
-          "@id": "https://mawazen-alsharq.com/#organization"
-        },
-        "inLanguage": "ar-SA",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": "https://mawazen-alsharq.com/search?q={search_term_string}"
-          },
-          "query-input": "required name=search_term_string"
-        }
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://mawazen-alsharq.com/#webpage",
-        "url": "https://mawazen-alsharq.com",
-        "name": "موازين الشرق للمقاولات | بناء وتشطيب السعودية",
-        "isPartOf": {
-          "@id": "https://mawazen-alsharq.com/#website"
-        },
-        "about": {
-          "@id": "https://mawazen-alsharq.com/#organization"
-        },
-        "primaryImageOfPage": {
-          "@id": "https://mawazen-alsharq.com/#primaryimage"
-        },
-        "datePublished": "2024-01-01T00:00:00+03:00",
-        "dateModified": "2025-10-22T00:00:00+03:00",
-        "description": "موازين الشرق للمقاولات - متخصصون بالبناء والتشطيب بجودة عالية",
-        "inLanguage": "ar-SA"
-      },
-      {
-        "@type": "BreadcrumbList",
-        "@id": "https://mawazen-alsharq.com/#breadcrumb",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "الرئيسية",
-            "item": "https://mawazen-alsharq.com"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "الخدمات",
-            "item": "https://mawazen-alsharq.com/services"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "اتصل بنا",
-            "item": "https://mawazen-alsharq.com/contact"
-          }
-        ]
-      },
-      {
-        "@type": "Service",
-        "@id": "https://mawazen-alsharq.com/#service",
-        "serviceType": "مقاولات عامة وبناء",
-        "provider": {
-          "@id": "https://mawazen-alsharq.com/#organization"
-        },
-        "areaServed": {
-          "@type": "Country",
-          "name": "المملكة العربية السعودية"
-        },
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "خدمات المقاولات",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "البناء والتشييد",
-                "description": "خدمات البناء الكامل للمشاريع السكنية والتجارية"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "التشطيب والديكور",
-                "description": "أعمال التشطيب الداخلي والخارجي بأعلى جودة"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "إدارة المشاريع",
-                "description": "إدارة شاملة للمشاريع من التخطيط حتى التسليم"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "الصيانة العامة",
-                "description": "خدمات الصيانة الدورية والإصلاحات"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "@type": "FAQPage",
-        "@id": "https://mawazen-alsharq.com/#faq",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "ما هي الخدمات التي تقدمها موازين الشرق؟",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "نقدم خدمات المقاولات العامة، البناء والتشييد، التشطيب والديكور، إدارة المشاريع، والصيانة العامة في جميع أنحاء المملكة العربية السعودية."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "هل تعملون في جميع مناطق المملكة؟",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "نعم، نقدم خدماتنا في جميع مناطق ومدن المملكة العربية السعودية مع فريق عمل متخصص ومعدات حديثة."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "كيف يمكنني الحصول على عرض سعر؟",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "يمكنك التواصل معنا عبر الهاتف أو البريد الإلكتروني أو نموذج الاتصال على الموقع، وسنقوم بزيارة الموقع وتقديم عرض سعر تفصيلي مجاناً."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "ما هي مدة تنفيذ المشاريع؟",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "تختلف مدة التنفيذ حسب حجم ونوع المشروع، ولكننا نلتزم بالجداول الزمنية المتفق عليها مع ضمان الجودة العالية."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "هل تقدمون ضمان على الأعمال؟",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "نعم، نقدم ضمان على جميع أعمالنا حسب نوع الخدمة المقدمة، مع متابعة دورية لضمان رضا العملاء."
-            }
-          }
-        ]
-      },
-      {
-        "@type": "ImageObject",
-        "@id": "https://mawazen-alsharq.com/#primaryimage",
-        "url": "https://mawazen-alsharq.com/assets/hero-image.webp",
-        "width": 1920,
-        "height": 1080,
-        "caption": "موازين الشرق للمقاولات العامة"
-      },
-      {
-        "@type": "WebPageElement",
-        "@id": "https://mawazen-alsharq.com/#hero",
-        "name": "Hero Section",
-        "cssSelector": "#hero",
-        "about": "موازين الشرق - بناء وتشطيب السعودية",
-        "description": "القسم الرئيسي للصفحة يعرض خدمات موازين الشرق للمقاولات العامة"
-      }
-    ]
+    "@type": "ConstructionBusiness",
+    "name": "موازين الشرق للمقاولات العامة",
+    "description": "شركة متخصصة في المقاولات العامة والبناء والتشطيب في المملكة العربية السعودية",
+    "url": "https://mawazen-alsharq.com",
+    "logo": "https://mawazen-alsharq.com/assets/logo2.png",
+    "telephone": "+966-XXX-XXXX",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "SA",
+      "addressRegion": "المملكة العربية السعودية"
+    },
+    "areaServed": "المملكة العربية السعودية",
+    "serviceType": "مقاولات عامة - بناء - تشطيب",
+    "sameAs": []
   }
   </script>
   
-  <!-- Minified Critical CSS -->
-  <style>*,::after,::before{box-sizing:border-box;border:0 solid #e5e7eb}::after,::before{--tw-content:''}html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-feature-settings:normal;font-variation-settings:normal}body{margin:0;line-height:inherit;font-family:Tajawal,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#333;background:#fff}#root{min-height:100vh}.loading-placeholder{display:flex;justify-content:center;align-items:center;height:100vh;background:linear-gradient(135deg,#f5f7fa,#c3cfe2);color:#333;font-size:1.2rem}img,video{max-width:100%;height:auto;display:block}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit;margin:0}a{color:inherit;text-decoration:inherit}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0}img[loading=lazy]{opacity:0;transition:opacity .3s}img[loading=lazy].loaded{opacity:1}</style>
-  
-  <!-- Noscript Fallback -->
-  <noscript>
-    <style>.no-js-msg{padding:2rem;text-align:center;background:#f8f9fa;border:1px solid #dee2e6;border-radius:.25rem;margin:2rem}.no-js-msg h1{color:#c29b40;margin-bottom:1rem}.contact-info{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid #dee2e6}</style>
-  </noscript>
+  <!-- Additional performance optimizations -->
+  <style>
+    /* Critical CSS for above-the-fold content */
+    body {
+      margin: 0;
+      font-family: 'Tajawal', sans-serif;
+    }
+    #root {
+      min-height: 100vh;
+    }
+  </style>
 </head>
 <body>
   <div id="root">
-    <div class="loading-placeholder" role="status" aria-live="polite">
-      <div>
-        <h1>موازين الشرق للمقاولات العامة</h1>
-        <p>جاري تحميل الموقع...</p>
-      </div>
-    </div>
-    
-    <noscript>
-      <div class="no-js-msg" role="alert">
-        <h1>موازين الشرق للمقاولات العامة</h1>
-        <p>للأسف، متصفحك لا يدعم JavaScript أو تم تعطيله.</p>
-        <p>للاستفادة الكاملة من موقعنا، يرجى تمكين JavaScript.</p>
-        <div class="contact-info">
-          <h2>للتواصل معنا:</h2>
-          <p>هاتف: <a href="tel:+966-XXX-XXXX">+966-XXX-XXXX</a></p>
-          <p>البريد: <a href="mailto:info@mawazen-alsharq.com">info@mawazen-alsharq.com</a></p>
-          <p>العمل: السبت - الخميس، 8 ص - 6 م</p>
-        </div>
-      </div>
-    </noscript>
+    <!-- Content will be rendered by React -->
+    <!-- Ensure proper heading structure in your React components: -->
+    <!-- 
+      <h1>موازين الشرق للمقاولات العامة</h1>
+      <h2>خدماتنا</h2>
+      <h3>البناء والتشييد</h3>
+      <h3>التشطيب والديكور</h3>
+      <h2>مشاريعنا</h2>
+      ... etc.
+    -->
   </div>
   
-  <!-- BUILD SCRIPT - REPLACE WITH ACTUAL HASH AFTER VITE BUILD -->
-  <!-- Get the correct filename from dist/index.html after running: npm run build -->
-  <!-- Example output: /assets/index-8a2b4c6d.js -->
-  <script type="module" crossorigin src="/assets/index-8a2b4c6d.js"></script>
+  <script type="module" src="/src/main.jsx"></script>
   
-  <!-- Optimized Scripts -->
+  <!-- Additional structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPoint",
+    "telephone": "+966-XXX-XXXX",
+    "contactType": "customer service",
+    "areaServed": "SA",
+    "availableLanguage": "ar"
+  }
+  </script>
+  
+  <!-- Performance monitoring script (optional) -->
   <script>
-// Font Loading
-if('fonts'in document)document.fonts.ready.then(()=>document.body.classList.remove('font-loading'));
-
-// Native Lazy Loading Support
-if('loading'in HTMLImageElement.prototype){const imgs=document.querySelectorAll('img[loading="lazy"]');imgs.forEach(img=>{img.addEventListener('load',()=>img.classList.add('loaded'))})}else if('IntersectionObserver'in window){const observer=new IntersectionObserver((entries,obs)=>{entries.forEach(entry=>{if(entry.isIntersecting){const img=entry.target;img.src=img.dataset.src;if(img.dataset.srcset)img.srcset=img.dataset.srcset;img.classList.add('loaded');obs.unobserve(img)}})},{rootMargin:'50px'});document.querySelectorAll('img[data-src]').forEach(img=>observer.observe(img))}
-
-// Loading Placeholder Removal
-window.addEventListener('load',()=>{const placeholder=document.querySelector('.loading-placeholder');if(placeholder)setTimeout(()=>placeholder.style.display='none',200);
-
-// Web Vitals Monitoring
-if('PerformanceObserver'in window){try{new PerformanceObserver(list=>{list.getEntries().forEach(entry=>{if(entry.entryType==='largest-contentful-paint')console.log('LCP:',entry.startTime,'ms')})}).observe({entryTypes:['largest-contentful-paint']});new PerformanceObserver(list=>{list.getEntries().forEach(entry=>{if(!entry.hadRecentInput)console.log('CLS:',entry.value)})}).observe({entryTypes:['layout-shift']});new PerformanceObserver(list=>{list.getEntries().forEach(entry=>{console.log('FID:',entry.processingStart-entry.startTime,'ms')})}).observe({entryTypes:['first-input']})}catch(e){}}
-
-// FCP
-if('performance'in window&&performance.getEntriesByType){const fcp=performance.getEntriesByType('paint').find(e=>e.name==='first-contentful-paint');if(fcp)console.log('FCP:',fcp.startTime,'ms')}}});
-
-// Service Worker
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
-
-// Prefetch on Hover
-document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('a[href^="/"]').forEach(link=>{link.addEventListener('mouseenter',()=>{const href=link.getAttribute('href');if(href&&!document.querySelector(`link[href="${href}"]`)){const prefetch=document.createElement('link');prefetch.rel='prefetch';prefetch.href=href;document.head.appendChild(prefetch)}},{once:true})})});
+    // Lazy load images that are not critical
+    document.addEventListener('DOMContentLoaded', function() {
+      const lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
+      
+      if ('IntersectionObserver' in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              let lazyImage = entry.target;
+              lazyImage.src = lazyImage.dataset.src;
+              lazyImage.classList.remove('lazy');
+              lazyImageObserver.unobserve(lazyImage);
+            }
+          });
+        });
+        
+        lazyImages.forEach(function(lazyImage) {
+          lazyImageObserver.observe(lazyImage);
+        });
+      }
+    });
   </script>
 </body>
 </html>
