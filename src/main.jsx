@@ -33,7 +33,7 @@ const setupPerformanceMonitoring = () => {
     const lastEntry = entries[entries.length - 1];
     console.log('LCP candidate:', lastEntry.startTime, lastEntry);
   });
-  
+
   observer.observe({ type: 'largest-contentful-paint', buffered: true });
 };
 
@@ -41,23 +41,23 @@ const setupPerformanceMonitoring = () => {
 if (typeof window !== 'undefined') {
   // تحميل الخطوط بشكل غير متزامن
   loadFonts();
-  
+
   // إعداد مراقبة الأداء
   setupPerformanceMonitoring();
-  
+
   // إعداد تحميل أولي للمكونات الحرجة
   const prefetchCriticalComponents = () => {
-    // Prefetch للمكونات الرئيسية
-    const criticalPaths = ['/src/components/NavBar.jsx', '/src/components/Footer.jsx'];
-    
+    const criticalPaths = ['/assets/js/vendor-react.js', '/assets/js/vendor-router.js'];
+
     criticalPaths.forEach(path => {
       const link = document.createElement('link');
       link.rel = 'modulepreload';
       link.href = path;
+      link.as = 'script';
       document.head.appendChild(link);
     });
   };
-  
+
   // تأخير prefetch حتى يصبح الخادم غير مشغول
   setTimeout(prefetchCriticalComponents, 1000);
 }
@@ -73,11 +73,11 @@ try {
   );
 } catch (error) {
   console.error('Failed to render App:', error);
-  
+
   // عرض واجهة خطأ بديلة
   const ErrorFallback = () => (
-    <div style={{ 
-      textAlign: 'center', 
+    <div style={{
+      textAlign: 'center',
       padding: '50px',
       fontFamily: 'Tajawal, sans-serif',
       direction: 'rtl'
@@ -89,7 +89,7 @@ try {
       </button>
     </div>
   );
-  
+
   root.render(<ErrorFallback />);
 }
 
@@ -102,7 +102,7 @@ if (process.env.NODE_ENV === 'development') {
     // يمكنك إرسال metric إلى Google Analytics أو أي خدمة تحليلات
     const body = JSON.stringify(metric);
     const url = '/api/web-vitals';
-    
+
     // استخدام navigator.sendBeacon إذا كان متاحاً
     if (navigator.sendBeacon) {
       navigator.sendBeacon(url, body);

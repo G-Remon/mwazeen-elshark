@@ -152,7 +152,7 @@ export default defineConfig(({ mode }) => {
       __PRODUCTION__: JSON.stringify(isProduction)
     },
 
-    base: './',
+    base: '/',
 
     optimizeDeps: {
       include: ['react', 'react-dom', 'react-router-dom', 'framer-motion'],
