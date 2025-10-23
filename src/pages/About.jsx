@@ -237,6 +237,12 @@ const About = () => {
     } else {
       sessionStorage.setItem('aboutPageAnimated', 'true');
     }
+
+    // Cleanup function for memory management
+    return () => {
+      // Clean up any potential event listeners or timeouts here
+      // إذا تمت إضافة أي event listeners في المستقبل
+    };
   }, []);
 
   // Structured Data for SEO
@@ -274,6 +280,8 @@ const About = () => {
       className="min-h-screen bg-white overflow-x-hidden"
       itemScope
       itemType="https://schema.org/Organization"
+      dir={isArabic ? "rtl" : "ltr"} // إضافة دعم RTL
+      style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
     >
       {/* Structured Data for SEO */}
       <script type="application/ld+json">
@@ -288,6 +296,7 @@ const About = () => {
         className="relative py-12 md:py-20 lg:py-24 bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900 overflow-hidden w-full"
         role="banner"
         aria-labelledby="about-title"
+        style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
       >
         {/* خلفية متحركة أكثر هدوءاً */}
         <div className="absolute inset-0">
@@ -311,6 +320,7 @@ const About = () => {
               ease: "linear"
             }}
             className="absolute top-1/4 left-1/4 w-48 h-48 md:w-64 md:h-64 bg-amber-500/3 rounded-full blur-2xl"
+            style={{ willChange: 'transform' }} // تحسين الأداء البصري
           ></motion.div>
           
           <motion.div
@@ -325,6 +335,7 @@ const About = () => {
               delay: 3
             }}
             className="absolute bottom-1/4 right-1/4 w-32 h-32 md:w-48 md:h-48 bg-blue-400/3 rounded-full blur-2xl"
+            style={{ willChange: 'transform' }} // تحسين الأداء البصري
           ></motion.div>
         </div>
 
@@ -334,8 +345,9 @@ const About = () => {
             <motion.div
               variants={headerItemVariants}
               className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full mb-6 md:mb-8 shadow-lg mx-auto"
+              style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
             >
-              <div className="w-1.5 h-1.5 bg-amber-400 rounded-full mr-2"></div>
+              <div className={`w-1.5 h-1.5 bg-amber-400 rounded-full ${isArabic ? 'ml-2' : 'mr-2'}`}></div>
               <span className="text-white/90 font-medium text-xs md:text-sm tracking-wider">
                 {currentContent.badge}
               </span>
@@ -346,6 +358,7 @@ const About = () => {
               variants={headerItemVariants}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight px-2"
               id="about-title"
+              style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
             >
               <span className="block bg-gradient-to-r from-white via-slate-100 to-amber-100 bg-clip-text text-transparent">
                 {currentContent.title}
@@ -356,6 +369,7 @@ const About = () => {
             <motion.div
               variants={headerItemVariants}
               className="mb-6 md:mb-8"
+              style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
             >
               <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-slate-200 mb-3 md:mb-4 px-2">
                 {currentContent.subtitle}
@@ -367,6 +381,7 @@ const About = () => {
             <motion.p
               variants={headerItemVariants}
               className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 max-w-2xl md:max-w-3xl mx-auto leading-relaxed font-light mb-6 md:mb-8 px-3"
+              style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
             >
               {currentContent.description}
             </motion.p>
@@ -375,6 +390,7 @@ const About = () => {
             <motion.div
               variants={headerItemVariants}
               className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center mt-8 md:mt-10 w-full px-2"
+              style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
             >
               <motion.button
                 whileHover={{ 
@@ -383,6 +399,8 @@ const About = () => {
                 }}
                 whileTap={{ scale: 0.98 }}
                 className="px-6 py-2.5 md:px-8 md:py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-lg md:rounded-xl shadow-lg transition-all duration-300 border border-amber-400/30 w-full sm:w-auto text-sm md:text-base"
+                aria-label={currentContent.discoverProjects}
+                style={{ willChange: 'transform' }} // تحسين الأداء البصري
               >
                 <Link to="/projects" className="flex items-center justify-center">
                   {currentContent.discoverProjects}
@@ -396,6 +414,8 @@ const About = () => {
                 }}
                 whileTap={{ scale: 0.98 }}
                 className="px-6 py-2.5 md:px-8 md:py-3 bg-white/8 backdrop-blur-sm text-white font-semibold rounded-lg md:rounded-xl border border-white/20 shadow-lg transition-all duration-300 w-full sm:w-auto text-sm md:text-base"
+                aria-label={currentContent.contactUs}
+                style={{ willChange: 'transform' }} // تحسين الأداء البصري
               >
                 <Link to="/contact" className="flex items-center justify-center">
                   {currentContent.contactUs}
@@ -409,12 +429,15 @@ const About = () => {
               transition={{ duration: 2, repeat: Infinity }}
               className="mt-10 md:mt-12 cursor-pointer"
               onClick={scrollToNextSection}
+              aria-label={currentContent.scrollDown}
+              style={{ willChange: 'transform' }} // تحسين الأداء البصري
             >
               <div className="w-5 h-8 md:w-6 md:h-10 border border-white/30 rounded-full mx-auto flex justify-center">
                 <motion.div
                   animate={{ y: [0, 6, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
                   className="w-0.5 h-2 md:h-3 bg-white/50 rounded-full mt-2"
+                  style={{ willChange: 'transform' }} // تحسين الأداء البصري
                 ></motion.div>
               </div>
               <p className="text-white/60 text-xs md:text-sm mt-2">
@@ -444,6 +467,7 @@ const About = () => {
                 transition={{ duration: 0.4 }}
                 viewport={{ once: true, margin: "-50px" }}
                 className={`${isArabic ? 'lg:order-2' : ''}`}
+                style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
               >
                 <div className="mb-6 md:mb-8 lg:mb-10">
                   <span className="text-blue-700 font-semibold text-sm md:text-base lg:text-lg tracking-wider uppercase">{currentContent.story}</span>
@@ -465,9 +489,10 @@ const About = () => {
                   transition={{ delay: 0.3, duration: 0.3 }}
                   viewport={{ once: true, margin: "-50px" }}
                   className="mt-6 md:mt-8 lg:mt-10 bg-white p-4 md:p-6 lg:p-8 rounded-xl md:rounded-2xl shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300"
+                  style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
                 >
                   <div className="flex items-start">
-                    <div className="flex-shrink-0 bg-gradient-to-br from-blue-700 to-blue-800 p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl text-white mr-3 md:mr-4 lg:mr-5">
+                    <div className={`flex-shrink-0 bg-gradient-to-br from-blue-700 to-blue-800 p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl text-white ${isArabic ? 'ml-3 md:ml-4 lg:ml-5' : 'mr-3 md:mr-4 lg:mr-5'}`}>
                       <span className="text-lg md:text-xl lg:text-2xl">🏆</span>
                     </div>
                     <div>
@@ -489,6 +514,7 @@ const About = () => {
                 transition={{ duration: 0.4 }}
                 viewport={{ once: true, margin: "-50px" }}
                 className={`relative ${isArabic ? 'lg:order-1' : ''}`}
+                style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
               >
                 <Suspense fallback={
                   <div className="bg-gradient-to-br from-blue-700 to-blue-800 h-56 sm:h-64 md:h-80 lg:h-96 xl:h-[500px] rounded-xl md:rounded-2xl lg:rounded-3xl animate-pulse flex items-center justify-center shadow-xl">
@@ -544,9 +570,10 @@ const About = () => {
                 viewport={{ once: true, margin: "-50px" }}
                 className="bg-white p-6 md:p-8 lg:p-10 rounded-xl md:rounded-2xl shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 group"
                 tabIndex={0}
+                style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
               >
                 <div className="flex items-center mb-4 md:mb-6 lg:mb-8">
-                  <div className="bg-gradient-to-br from-blue-700 to-blue-800 p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl text-white mr-3 md:mr-4 lg:mr-5 group-hover:scale-105 transition-transform duration-300">
+                  <div className={`bg-gradient-to-br from-blue-700 to-blue-800 p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl text-white ${isArabic ? 'ml-3 md:ml-4 lg:ml-5' : 'mr-3 md:mr-4 lg:mr-5'} group-hover:scale-105 transition-transform duration-300`}>
                     <span className="text-lg md:text-xl lg:text-2xl">🎯</span>
                   </div>
                   <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-800">
@@ -564,9 +591,10 @@ const About = () => {
                 viewport={{ once: true, margin: "-50px" }}
                 className="bg-white p-6 md:p-8 lg:p-10 rounded-xl md:rounded-2xl shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 group"
                 tabIndex={0}
+                style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
               >
                 <div className="flex items-center mb-4 md:mb-6 lg:mb-8">
-                  <div className="bg-gradient-to-br from-amber-600 to-amber-700 p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl text-white mr-3 md:mr-4 lg:mr-5 group-hover:scale-105 transition-transform duration-300">
+                  <div className={`bg-gradient-to-br from-amber-600 to-amber-700 p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl text-white ${isArabic ? 'ml-3 md:ml-4 lg:ml-5' : 'mr-3 md:mr-4 lg:mr-5'} group-hover:scale-105 transition-transform duration-300`}>
                     <span className="text-lg md:text-xl lg:text-2xl">🚀</span>
                   </div>
                   <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-800">
@@ -588,6 +616,7 @@ const About = () => {
               transition={{ duration: 0.3 }}
               viewport={{ once: true, margin: "-50px" }}
               className="text-center mb-10 md:mb-12 lg:mb-16"
+              style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
             >
               <h2 id="values-heading" className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-800 mb-3 md:mb-4 lg:mb-5">
                 {currentContent.values}
@@ -608,6 +637,7 @@ const About = () => {
                   whileHover={{ y: -3, transition: { duration: 0.2 } }}
                   className="bg-white p-4 md:p-6 lg:p-8 rounded-xl md:rounded-2xl shadow-lg text-center hover:shadow-xl transition-all duration-300 border border-slate-200 group"
                   tabIndex={0}
+                  style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
                 >
                   <div className={`bg-gradient-to-br ${value.color} p-3 md:p-4 lg:p-5 rounded-xl md:rounded-2xl inline-flex mb-3 md:mb-5 lg:mb-7 group-hover:scale-105 transition-transform duration-300 shadow-md`}>
                     <ValueIcon icon={value.icon} className="text-2xl md:text-3xl lg:text-4xl text-white" />
@@ -631,6 +661,7 @@ const About = () => {
             viewport={{ once: true, margin: "-50px" }}
             className="bg-gradient-to-r from-slate-800 to-slate-900 text-white rounded-xl md:rounded-2xl lg:rounded-3xl p-6 md:p-8 lg:p-10 xl:p-12 shadow-xl md:shadow-2xl relative overflow-hidden mb-16 md:mb-20 lg:mb-28 w-full"
             aria-labelledby="stats-heading"
+            style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
           >
             {/* Background pattern */}
             <div className="absolute inset-0 opacity-5">
@@ -670,6 +701,7 @@ const About = () => {
                     transition={{ delay: index * 0.08, duration: 0.3 }}
                     viewport={{ once: true, margin: "-50px" }}
                     className="p-3 md:p-4 lg:p-5"
+                    style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
                   >
                     <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-1 md:mb-2 lg:mb-3 bg-gradient-to-br from-amber-400 to-amber-500 bg-clip-text text-transparent" aria-label={stat.value}>
                       {stat.value}
@@ -689,6 +721,7 @@ const About = () => {
             viewport={{ once: true, margin: "-50px" }}
             className="mb-12 md:mb-16 lg:mb-20 w-full"
             aria-labelledby="vision-2030-heading"
+            style={{ willChange: 'transform, opacity' }} // تحسين الأداء البصري
           >
             <div className="bg-gradient-to-r from-green-600 to-green-700 text-white rounded-xl md:rounded-2xl lg:rounded-3xl p-6 md:p-8 lg:p-10 xl:p-12 shadow-xl relative overflow-hidden w-full">
               {/* Background pattern */}
