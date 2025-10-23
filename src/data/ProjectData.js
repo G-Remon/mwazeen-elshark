@@ -74,7 +74,7 @@ export const projectsData = [
     },
     images: [
       {
-        src: getImagePath('/public/assets/Projects/مشروع معارض العجلان/1.webp'),
+        src: getImagePath('/assets/Projects/مشروع معارض العجلان/1.webp'),
         alt: {
           ar: 'الواجهة الرئيسية لمعارض العجلان',
           en: 'Main facade of Al-Ajlan Exhibitions'

@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, memo, lazy, Suspense } from 'react';
+import React, { useMemo, useCallback, memo, lazy, Suspense, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
@@ -104,43 +104,43 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      duration: 0.6
+      staggerChildren: 0.1,
+      duration: 0.4
     }
   }
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.4,
       ease: "easeOut"
     }
   }
 };
 
 const statsVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
+  hidden: { opacity: 0, scale: 0.9 },
   visible: {
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 0.5
+      duration: 0.3
     }
   }
 };
 
-// تأثيرات الحركة للهيدر المحسن - أكثر هدوءاً
+// تأثيرات الحركة للهيدر المحسن - أسرع
 const headerContainerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.3,
-      duration: 1.5
+      staggerChildren: 0.15,
+      duration: 0.8
     }
   }
 };
@@ -148,15 +148,15 @@ const headerContainerVariants = {
 const headerItemVariants = {
   hidden: { 
     opacity: 0, 
-    y: 15,
-    scale: 0.95
+    y: 10,
+    scale: 0.98
   },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 1.2,
+      duration: 0.6,
       ease: [0.25, 0.46, 0.45, 0.94]
     }
   }
@@ -177,6 +177,7 @@ const SectionPlaceholder = () => (
 
 const About = () => {
   const { language, isArabic } = useLanguage();
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   // استخدام useMemo لحساب المحتوى الحالي
   const currentContent = useMemo(() => content[language], [language]);
@@ -228,6 +229,16 @@ const About = () => {
     }
   }, []);
 
+  // التحقق مما إذا كان قد تم تشغيل الأنيميشن من قبل
+  useEffect(() => {
+    const animatedBefore = sessionStorage.getItem('aboutPageAnimated');
+    if (animatedBefore) {
+      setHasAnimated(true);
+    } else {
+      sessionStorage.setItem('aboutPageAnimated', 'true');
+    }
+  }, []);
+
   // Structured Data for SEO
   const structuredData = useMemo(() => ({
     '@context': 'https://schema.org',
@@ -257,9 +268,9 @@ const About = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
+      initial={hasAnimated ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.3 }}
       className="min-h-screen bg-white overflow-x-hidden"
       itemScope
       itemType="https://schema.org/Organization"
@@ -272,7 +283,7 @@ const About = () => {
       {/* الهيدر الرئيسي المحسن */}
       <motion.section
         variants={headerContainerVariants}
-        initial="hidden"
+        initial={hasAnimated ? "visible" : "hidden"}
         animate="visible"
         className="relative py-12 md:py-20 lg:py-24 bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900 overflow-hidden w-full"
         role="banner"
@@ -295,7 +306,7 @@ const About = () => {
               y: [0, -15, 0],
             }}
             transition={{
-              duration: 30,
+              duration: 20,
               repeat: Infinity,
               ease: "linear"
             }}
@@ -308,7 +319,7 @@ const About = () => {
               y: [0, 20, 0],
             }}
             transition={{
-              duration: 25,
+              duration: 18,
               repeat: Infinity,
               ease: "linear",
               delay: 3
@@ -395,14 +406,14 @@ const About = () => {
             {/* مؤشر التمرير */}
             <motion.div
               animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity }}
+              transition={{ duration: 2, repeat: Infinity }}
               className="mt-10 md:mt-12 cursor-pointer"
               onClick={scrollToNextSection}
             >
               <div className="w-5 h-8 md:w-6 md:h-10 border border-white/30 rounded-full mx-auto flex justify-center">
                 <motion.div
                   animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 2.5, repeat: Infinity }}
+                  transition={{ duration: 2, repeat: Infinity }}
                   className="w-0.5 h-2 md:h-3 bg-white/50 rounded-full mt-2"
                 ></motion.div>
               </div>
@@ -428,9 +439,9 @@ const About = () => {
           <section id="story-section" className="mb-16 md:mb-20 lg:mb-28" aria-labelledby="story-heading">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
               <motion.div
-                initial={{ opacity: 0, x: isArabic ? 20 : -20 }}
+                initial={hasAnimated ? false : { opacity: 0, x: isArabic ? 20 : -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.4 }}
                 viewport={{ once: true, margin: "-50px" }}
                 className={`${isArabic ? 'lg:order-2' : ''}`}
               >
@@ -449,9 +460,9 @@ const About = () => {
                   ))}
                 </div>
                 <motion.div
-                  initial={{ opacity: 0, y: 15 }}
+                  initial={hasAnimated ? false : { opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.5 }}
+                  transition={{ delay: 0.3, duration: 0.3 }}
                   viewport={{ once: true, margin: "-50px" }}
                   className="mt-6 md:mt-8 lg:mt-10 bg-white p-4 md:p-6 lg:p-8 rounded-xl md:rounded-2xl shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300"
                 >
@@ -473,9 +484,9 @@ const About = () => {
                 </motion.div>
               </motion.div>
               <motion.div
-                initial={{ opacity: 0, x: isArabic ? -20 : 20 }}
+                initial={hasAnimated ? false : { opacity: 0, x: isArabic ? -20 : 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.4 }}
                 viewport={{ once: true, margin: "-50px" }}
                 className={`relative ${isArabic ? 'lg:order-1' : ''}`}
               >
@@ -527,9 +538,9 @@ const About = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={hasAnimated ? false : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.3 }}
                 viewport={{ once: true, margin: "-50px" }}
                 className="bg-white p-6 md:p-8 lg:p-10 rounded-xl md:rounded-2xl shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 group"
                 tabIndex={0}
@@ -547,9 +558,9 @@ const About = () => {
                 </p>
               </motion.div>
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={hasAnimated ? false : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
                 viewport={{ once: true, margin: "-50px" }}
                 className="bg-white p-6 md:p-8 lg:p-10 rounded-xl md:rounded-2xl shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 group"
                 tabIndex={0}
@@ -572,9 +583,9 @@ const About = () => {
           {/* القيم */}
           <section className="mb-16 md:mb-20 lg:mb-28" aria-labelledby="values-heading">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={hasAnimated ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.3 }}
               viewport={{ once: true, margin: "-50px" }}
               className="text-center mb-10 md:mb-12 lg:mb-16"
             >
@@ -590,11 +601,11 @@ const About = () => {
               {values.map((value, index) => (
                 <motion.div
                   key={value.title}
-                  initial={{ opacity: 0, y: 15 }}
+                  initial={hasAnimated ? false : { opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.4 }}
+                  transition={{ delay: index * 0.08, duration: 0.3 }}
                   viewport={{ once: true, margin: "-50px" }}
-                  whileHover={{ y: -3, transition: { duration: 0.3 } }}
+                  whileHover={{ y: -3, transition: { duration: 0.2 } }}
                   className="bg-white p-4 md:p-6 lg:p-8 rounded-xl md:rounded-2xl shadow-lg text-center hover:shadow-xl transition-all duration-300 border border-slate-200 group"
                   tabIndex={0}
                 >
@@ -614,9 +625,9 @@ const About = () => {
 
           {/* الإحصائيات */}
           <motion.section
-            initial={{ opacity: 0, y: 30 }}
+            initial={hasAnimated ? false : { opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.4 }}
             viewport={{ once: true, margin: "-50px" }}
             className="bg-gradient-to-r from-slate-800 to-slate-900 text-white rounded-xl md:rounded-2xl lg:rounded-3xl p-6 md:p-8 lg:p-10 xl:p-12 shadow-xl md:shadow-2xl relative overflow-hidden mb-16 md:mb-20 lg:mb-28 w-full"
             aria-labelledby="stats-heading"
@@ -654,9 +665,9 @@ const About = () => {
                   <motion.div
                     key={stat.label}
                     variants={statsVariants}
-                    initial="hidden"
+                    initial={hasAnimated ? "visible" : "hidden"}
                     whileInView="visible"
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    transition={{ delay: index * 0.08, duration: 0.3 }}
                     viewport={{ once: true, margin: "-50px" }}
                     className="p-3 md:p-4 lg:p-5"
                   >
@@ -672,9 +683,9 @@ const About = () => {
 
           {/* قسم رؤية 2030 */}
           <motion.section
-            initial={{ opacity: 0, y: 20 }}
+            initial={hasAnimated ? false : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
             viewport={{ once: true, margin: "-50px" }}
             className="mb-12 md:mb-16 lg:mb-20 w-full"
             aria-labelledby="vision-2030-heading"

@@ -1,5 +1,5 @@
 // components/PriceRequestForm.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // تم إضافة useEffect
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -16,7 +16,24 @@ const PriceRequestForm = () => {
         details: ''
     });
 
-    // Multi-language content
+    // إضافة useEffect لإدارة مؤقت إخفاء الرسالة
+    useEffect(() => {
+        let timer;
+        if (submitStatus) {
+            timer = setTimeout(() => {
+                setSubmitStatus(null);
+            }, 10000); // 10 ثواني
+        }
+        
+        // تنظيف المؤقت عند إلغاء تحميل المكون
+        return () => {
+            if (timer) {
+                clearTimeout(timer);
+            }
+        };
+    }, [submitStatus]); // يعتمد على حالة submitStatus
+
+    // باقي الكود يبقى كما هو...
     const content = {
         ar: {
             title: "طلب عرض السعر",
@@ -117,51 +134,52 @@ const PriceRequestForm = () => {
             }, 10000);
         });
     };
-const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    if (!validateForm()) {
-        setSubmitStatus({ type: 'error', message: currentContent.error });
-        return;
-    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    setIsSubmitting(true);
-    setSubmitStatus(null);
+        if (!validateForm()) {
+            setSubmitStatus({ type: 'error', message: currentContent.error });
+            return;
+        }
 
-    try {
-        // البحث عن التسمية العربية لنوع المشروع
-        const arabicProjectType = projectTypes.find(
-            type => type.value === formData.projectType
-        )?.label || formData.projectType;
+        setIsSubmitting(true);
+        setSubmitStatus(null);
 
-        const submissionData = {
-            name: formData.name,
-            phone: formData.phone,
-            email: formData.email,
-            projectType: isArabic ? arabicProjectType : formData.projectType,
-            address: formData.address,
-            details: formData.details,            // تم إزالة timestamp لأنه سيتم إضافته تلقائياً في السكريبت
-            source: 'website'
-        };
+        try {
+            // البحث عن التسمية العربية لنوع المشروع
+            const arabicProjectType = projectTypes.find(
+                type => type.value === formData.projectType
+            )?.label || formData.projectType;
 
-        await submitToGoogleSheet(submissionData);
+            const submissionData = {
+                name: formData.name,
+                phone: formData.phone,
+                email: formData.email,
+                projectType: isArabic ? arabicProjectType : formData.projectType,
+                address: formData.address,
+                details: formData.details,
+                source: 'website'
+            };
 
-        setSubmitStatus({ type: 'success', message: currentContent.success });
-        setFormData({
-            name: '',
-            phone: '',
-            email: '',
-            projectType: '',
-            address: '',
-            details: ''
-        });
-    } catch (error) {
-        console.error('Submission error:', error);
-        setSubmitStatus({ type: 'error', message: currentContent.error });
-    } finally {
-        setIsSubmitting(false);
-    }
-};
+            await submitToGoogleSheet(submissionData);
+
+            setSubmitStatus({ type: 'success', message: currentContent.success });
+            setFormData({
+                name: '',
+                phone: '',
+                email: '',
+                projectType: '',
+                address: '',
+                details: ''
+            });
+        } catch (error) {
+            console.error('Submission error:', error);
+            setSubmitStatus({ type: 'error', message: currentContent.error });
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     const inputClassName = `w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all ${isArabic ? 'text-right' : 'text-left'
         }`;
@@ -297,6 +315,7 @@ const handleSubmit = async (e) => {
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }} // إضافة خروج سلس
                         className={`mt-6 p-4 rounded-lg text-center ${submitStatus.type === 'success'
                                 ? 'bg-green-100 text-green-700 border border-green-200'
                                 : 'bg-red-100 text-red-700 border border-red-200'
