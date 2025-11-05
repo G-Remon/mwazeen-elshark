@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mawazen-alsharq.com/sitemap.xml
+
+

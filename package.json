@@ -28,6 +28,7 @@
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^5.0.4",
     "autoprefixer": "^10.4.21",
+    "dependency-cruiser": "^17.2.0",
     "postcss": "^8.5.6",
     "rollup-plugin-visualizer": "^6.0.5",
     "tailwindcss": "^3.4.18",
