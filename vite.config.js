@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { visualizer } from 'rollup-plugin-visualizer'
+import viteCompression from 'vite-plugin-compression'
 
 export default defineConfig(({ mode }) => {
   const isProduction = mode === 'production'
@@ -11,6 +12,8 @@ export default defineConfig(({ mode }) => {
         jsxRuntime: 'automatic',
         jsxImportSource: 'react',
       }),
+      viteCompression({ algorithm: 'brotliCompress', ext: '.br', deleteOriginFile: false }),
+      viteCompression({ algorithm: 'gzip', ext: '.gz', deleteOriginFile: false }),
       mode === 'analyze' &&
         visualizer({
           filename: 'dist/stats.html',

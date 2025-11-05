@@ -285,9 +285,12 @@ const Home = () => {
             <OptimizedImage
               src="/assets/Home/home-1.jpg.webp"
               alt="بناء وتطوير عقاري متكامل"
-              fill
+              width={1920}
+              height={1080}
               className="w-full h-full object-cover"
-              priority
+              fetchpriority="high"
+              loading="eager"
+              sizes="100vw"
               onError={handleHeroImageError}
               quality={85}
             />
