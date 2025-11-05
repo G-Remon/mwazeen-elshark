@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mawazen-alsharq.com/sitemap.xml
+Sitemap: https://mwazeen-elshark.vercel.app/sitemap.xml
 
 

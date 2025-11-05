@@ -288,11 +288,10 @@ const Home = () => {
               width={1920}
               height={1080}
               className="w-full h-full object-cover"
-              fetchpriority="high"
+              fetchPriority="high"
               loading="eager"
               sizes="100vw"
               onError={handleHeroImageError}
-              quality={85}
             />
           </Suspense>
           

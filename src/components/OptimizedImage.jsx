@@ -32,10 +32,11 @@ const OptimizedImage = memo(({
   return (
     <img
       src={imageSrc}
-      alt={alt}
+      alt={alt || ''}
       width={width}
       height={height}
       loading={loading}
+      fetchPriority={props.fetchPriority || (loading === 'eager' ? 'high' : 'auto')}
       onLoad={handleLoad}
       onError={handleError}
       className={`
@@ -44,7 +45,8 @@ const OptimizedImage = memo(({
         transition-opacity duration-300
         object-cover
       `}
-      decoding="async"
+      decoding={loading === 'eager' ? 'sync' : 'async'}
+      sizes={props.sizes}
       {...props}
     />
   );

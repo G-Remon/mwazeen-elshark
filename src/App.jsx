@@ -5,10 +5,12 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
 
-// تحميل كسول مع prefetching
-const Home = lazy(() => import(/* webpackPrefetch: true */ './pages/Home'));
+// Eagerly load Home component - it's the LCP candidate and must render immediately
+import Home from './pages/Home';
+
+// Lazy load other pages - not critical for initial render
 const About = lazy(() => import('./pages/About'));
-const Projects = lazy(() => import(/* webpackPreload: true */ './pages/Projects'));
+const Projects = lazy(() => import('./pages/Projects'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const Contact = lazy(() => import('./pages/Contact'));
 const PriceRequest = lazy(() => import('./pages/PriceRequest'));
@@ -30,16 +32,20 @@ const OptimizedSuspense = ({ children }) => (
 
 function App() {
   useEffect(() => {
-    // Prefetch للصفحات المتوقعة
-    const prefetchPages = async () => {
-      if (window.location.pathname === '/') {
-        // Prefetch للصفحات الرئيسية عند تحميل الصفحة الرئيسية
-        const modules = [
-          import('./pages/Projects'),
-          import('./pages/Services')
-        ];
-        await Promise.all(modules);
-      }
+    // Prefetch non-critical pages after initial render - doesn't block LCP
+    const prefetchPages = () => {
+      // Use requestIdleCallback if available, otherwise setTimeout
+      const scheduler = window.requestIdleCallback || ((cb) => setTimeout(cb, 2000));
+      
+      scheduler(() => {
+        if (window.location.pathname === '/') {
+          // Prefetch popular pages after initial render
+          Promise.all([
+            import('./pages/Projects'),
+            import('./pages/Services')
+          ]).catch(() => {}); // Silently fail if prefetch fails
+        }
+      });
     };
     
     prefetchPages();
@@ -50,18 +56,42 @@ function App() {
       <Router>
         <div className="min-h-screen bg-light flex flex-col">
           <NavBar />
-          <main className="flex-grow ">
-            <OptimizedSuspense>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/projects" element={<Projects />} />
-                <Route path="/projects/:id" element={<ProjectDetail />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/price-request" element={<PriceRequest />} />
-                <Route path="/services" element={<Services />} />
-              </Routes>
-            </OptimizedSuspense>
+          <main className="flex-grow">
+            <Routes>
+              {/* Home is eagerly loaded - no Suspense needed */}
+              <Route path="/" element={<Home />} />
+              {/* Other routes use lazy loading */}
+              <Route path="/about" element={
+                <OptimizedSuspense>
+                  <About />
+                </OptimizedSuspense>
+              } />
+              <Route path="/projects" element={
+                <OptimizedSuspense>
+                  <Projects />
+                </OptimizedSuspense>
+              } />
+              <Route path="/projects/:id" element={
+                <OptimizedSuspense>
+                  <ProjectDetail />
+                </OptimizedSuspense>
+              } />
+              <Route path="/contact" element={
+                <OptimizedSuspense>
+                  <Contact />
+                </OptimizedSuspense>
+              } />
+              <Route path="/price-request" element={
+                <OptimizedSuspense>
+                  <PriceRequest />
+                </OptimizedSuspense>
+              } />
+              <Route path="/services" element={
+                <OptimizedSuspense>
+                  <Services />
+                </OptimizedSuspense>
+              } />
+            </Routes>
           </main>
           <Footer />
         </div>
