@@ -44,6 +44,10 @@ const NavBar = () => {
       href: '/projects'
     },
     {
+      name: { ar: 'العملاء', en: 'Clients' },
+      href: '/ClientsSection'
+    },
+    {
       name: { ar: 'طلب عرض السعر', en: 'Get Quote' },
       href: '/price-request'
     },

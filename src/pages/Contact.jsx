@@ -53,10 +53,10 @@ const ContactIcons = {
 
 // Loading component للـ Suspense
 const MapPlaceholder = () => (
-  <div className="h-80 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse rounded-lg flex items-center justify-center">
-    <div className="text-gray-400 text-center">
+  <div className="h-80 bg-gradient-to-br from-gray-100 to-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+    <div className="text-gray-500 text-center">
       <div className="text-2xl mb-2">🗺️</div>
-      <div>جاري تحميل الخريطة...</div>
+      <div className="text-sm">جاري تحميل الخريطة...</div>
     </div>
   </div>
 );
@@ -95,8 +95,12 @@ const Contact = () => {
       expertTeam: "فريقنا من الخبراء مستعد لتحويل رؤيتك إلى واقع ملموس",
       startProject: "ابدأ مشروعك اليوم",
       contactNow: "اتصل بنا الآن",
-      riyadh: "الرياض",
-      khobar: "الخبر"
+      riyadh: "الرياض - حي المروج",
+      khobar: "الخبر - حي الخزامي",
+      addresses: {
+        riyadh: "المملكة العربية السعودية - الرياض - حي المروج",
+        khobar: "المملكة العربية السعودية - الخبر - حي الخزامي"
+      }
     },
     en: {
       title: "Contact Us",
@@ -127,8 +131,12 @@ const Contact = () => {
       expertTeam: "Our expert team is ready to turn your vision into reality",
       startProject: "Start Your Project Today",
       contactNow: "Contact Us Now",
-      riyadh: "Riyadh",
-      khobar: "Al Khobar"
+      riyadh: "Riyadh - Al Murooj District",
+      khobar: "Al Khobar - Al Khuzama District",
+      addresses: {
+        riyadh: "Saudi Arabia - Riyadh - Al Murooj District",
+        khobar: "Saudi Arabia - Al Khobar - Al Khuzama District"
+      }
     }
   }), []);
 
@@ -137,7 +145,7 @@ const Contact = () => {
   // استخدام useCallback لمعالجة الاتصالات
   const handleContactClick = useCallback((type) => {
     const phoneNumber = '+966558002061';
-    const email = 'gm@mawazin-alsharq.com';
+    const email = 'mawazin-alsharq.com ';
 
     switch (type) {
       case 'call':
@@ -162,28 +170,28 @@ const Contact = () => {
     {
       name: 'Facebook',
       url: '#',
-      color: 'hover:bg-blue-600',
+      color: 'hover:bg-blue-500',
       icon: '📘',
       ariaLabel: { ar: 'تابعنا على فيسبوك', en: 'Follow us on Facebook' }
     },
     {
       name: 'Instagram',
       url: '#',
-      color: 'hover:bg-pink-600',
+      color: 'hover:bg-pink-500',
       icon: '📷',
       ariaLabel: { ar: 'تابعنا على إنستغرام', en: 'Follow us on Instagram' }
     },
     {
       name: 'LinkedIn',
       url: '#',
-      color: 'hover:bg-blue-800',
+      color: 'hover:bg-blue-700',
       icon: '💼',
       ariaLabel: { ar: 'تابعنا على لينكدإن', en: 'Follow us on LinkedIn' }
     },
     {
       name: 'Twitter',
       url: '#',
-      color: 'hover:bg-sky-500',
+      color: 'hover:bg-sky-400',
       icon: '🐦',
       ariaLabel: { ar: 'تابعنا على تويتر', en: 'Follow us on Twitter' }
     }
@@ -232,11 +240,11 @@ const Contact = () => {
     mainEntity: {
       '@type': 'Organization',
       name: 'موازين الشرق للمقاولات العامة',
-      telephone: '+966-55-800-2061',
-      email: 'gm@mawazin-alsharq.com',
+      telephone: '+966558002061',
+      email: 'mawazin-alsharq.com',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'الرياض',
+        streetAddress: 'حي المروج',
         addressLocality: 'الرياض',
         addressCountry: 'SA'
       },
@@ -258,7 +266,7 @@ const Contact = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-white"
+      className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50"
       itemScope
       itemType="https://schema.org/ContactPage"
     >
@@ -268,7 +276,7 @@ const Contact = () => {
       </script>
 
       {/* Header Section */}
-      <section className="bg-gradient-to-br from-blue-900 to-blue-700 text-white py-16 md:py-20" role="banner">
+      <section className="bg-gradient-to-br from-teal-600 to-blue-700 text-white py-16 md:py-20" role="banner">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -303,11 +311,11 @@ const Contact = () => {
               <motion.div
                 variants={itemVariants}
                 whileHover="hover"
-                className="bg-white rounded-xl md:rounded-2xl shadow-lg border border-gray-100 p-6 md:p-8 focus-within:ring-4 focus-within:ring-blue-100"
+                className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-6 md:p-8 focus-within:ring-4 focus-within:ring-blue-100/50"
                 tabIndex={0}
               >
                 <div className="flex items-center mb-6 md:mb-8">
-                  <div className="bg-blue-100 p-2 md:p-3 rounded-lg md:rounded-xl mr-3 md:mr-4">
+                  <div className="bg-blue-100 p-2 md:p-3 rounded-xl mr-3 md:mr-4">
                     <ContactIcons.Phone className="h-6 md:h-8 w-6 md:w-8 text-blue-600" />
                   </div>
                   <div>
@@ -338,7 +346,7 @@ const Contact = () => {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           onClick={() => handleContactClick('call')}
-                          className="bg-green-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center shadow-md text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-green-300"
+                          className="bg-green-500 hover:bg-green-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg transition-all font-medium flex items-center shadow-md text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-green-300"
                           aria-label={currentContent.directCall}
                         >
                           <ContactIcons.Phone className="h-4 md:h-5 w-4 md:w-5 mr-1 md:mr-2" />
@@ -348,7 +356,7 @@ const Contact = () => {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           onClick={() => handleContactClick('whatsapp')}
-                          className="bg-[#25D366] text-white px-4 md:px-6 py-2 md:py-3 rounded-lg hover:bg-green-600 transition-colors font-medium flex items-center shadow-md text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-green-300"
+                          className="bg-[#25D366] hover:bg-green-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg transition-all font-medium flex items-center shadow-md text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-green-300"
                           aria-label={currentContent.whatsapp}
                         >
                           <ContactIcons.WhatsApp className="h-4 md:h-5 w-4 md:w-5 mr-1 md:mr-2" />
@@ -368,13 +376,13 @@ const Contact = () => {
                         {currentContent.email}
                       </h3>
                       <p className="text-gray-800 text-lg md:text-xl font-bold mb-3 md:mb-4" itemProp="email">
-                        gm@mawazin-alsharq.com
+                      mawazin-alsharq.com
                       </p>
                       <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         onClick={() => handleContactClick('email')}
-                        className="bg-blue-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium flex items-center shadow-md text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-300"
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg transition-all font-medium flex items-center shadow-md text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-300"
                         aria-label={language === 'ar' ? 'إرسال بريد إلكتروني' : 'Send Email'}
                       >
                         <ContactIcons.Email className="h-4 md:h-5 w-4 md:w-5 mr-1 md:mr-2" />
@@ -392,7 +400,7 @@ const Contact = () => {
                 <motion.div
                   variants={itemVariants}
                   whileHover="hover"
-                  className="bg-white rounded-xl md:rounded-2xl shadow-lg border border-gray-100 p-4 md:p-6 focus-within:ring-4 focus-within:ring-purple-100"
+                  className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-4 md:p-6 focus-within:ring-4 focus-within:ring-purple-100/50"
                   tabIndex={0}
                 >
                   <div className="flex items-center mb-4 md:mb-6">
@@ -405,17 +413,17 @@ const Contact = () => {
                   </div>
 
                   <div className="space-y-3 md:space-y-4">
-                    <div className="p-3 md:p-4 rounded-lg border border-gray-200">
+                    <div className="p-3 md:p-4 rounded-lg border border-gray-200 bg-white/50">
                       <h4 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">
                         {currentContent.mainOffice}
                       </h4>
-                      <p className="text-gray-600 text-sm md:text-base">{currentContent.riyadh}</p>
+                      <p className="text-gray-600 text-sm md:text-base">{currentContent.addresses.riyadh}</p>
                     </div>
-                    <div className="p-3 md:p-4 rounded-lg border border-gray-200">
+                    <div className="p-3 md:p-4 rounded-lg border border-gray-200 bg-white/50">
                       <h4 className="font-semibold text-gray-900 mb-1 text-sm md:text-base">
                         {currentContent.branch}
                       </h4>
-                      <p className="text-gray-600 text-sm md:text-base">{currentContent.khobar}</p>
+                      <p className="text-gray-600 text-sm md:text-base">{currentContent.addresses.khobar}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -424,7 +432,7 @@ const Contact = () => {
                 <motion.div
                   variants={itemVariants}
                   whileHover="hover"
-                  className="bg-white rounded-xl md:rounded-2xl shadow-lg border border-gray-100 p-4 md:p-6 focus-within:ring-4 focus-within:ring-orange-100"
+                  className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-4 md:p-6 focus-within:ring-4 focus-within:ring-orange-100/50"
                   tabIndex={0}
                 >
                   <div className="flex items-center mb-4 md:mb-6">
@@ -461,7 +469,7 @@ const Contact = () => {
               <motion.div
                 variants={itemVariants}
                 whileHover="hover"
-                className="bg-white rounded-xl md:rounded-2xl shadow-lg border border-gray-100 p-4 md:p-6 focus-within:ring-4 focus-within:ring-indigo-100"
+                className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-4 md:p-6 focus-within:ring-4 focus-within:ring-indigo-100/50"
                 tabIndex={0}
               >
                 <div className="flex items-center mb-4 md:mb-6">
@@ -482,7 +490,7 @@ const Contact = () => {
               <motion.div
                 variants={itemVariants}
                 whileHover="hover"
-                className="bg-white rounded-xl md:rounded-2xl shadow-lg border border-gray-100 p-4 md:p-6 focus-within:ring-4 focus-within:ring-gray-100"
+                className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-4 md:p-6 focus-within:ring-4 focus-within:ring-gray-100/50"
                 tabIndex={0}
               >
                 <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-4 md:mb-6">
@@ -496,7 +504,7 @@ const Contact = () => {
                       href={social.url}
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      className={`flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-gray-100 rounded-lg ${social.color} text-white transition-all duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-current`}
+                      className={`flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-gray-100 rounded-lg ${social.color} text-gray-700 hover:text-white transition-all duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-current`}
                       aria-label={social.ariaLabel[language]}
                       rel="noopener noreferrer"
                       target="_blank"
@@ -515,7 +523,7 @@ const Contact = () => {
               <motion.div
                 variants={itemVariants}
                 whileHover="hover"
-                className="bg-white rounded-xl md:rounded-2xl shadow-lg border border-gray-100 overflow-hidden focus-within:ring-4 focus-within:ring-blue-100"
+                className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 overflow-hidden focus-within:ring-4 focus-within:ring-blue-100/50"
                 tabIndex={0}
               >
                 <div className="p-4 md:p-6 border-b border-gray-200">
@@ -547,7 +555,7 @@ const Contact = () => {
               <motion.div
                 variants={itemVariants}
                 whileHover="hover"
-                className="bg-white rounded-xl md:rounded-2xl shadow-lg border border-gray-100 overflow-hidden focus-within:ring-4 focus-within:ring-green-100"
+                className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 overflow-hidden focus-within:ring-4 focus-within:ring-green-100/50"
                 tabIndex={0}
               >
                 <div className="p-4 md:p-6 border-b border-gray-200">
@@ -576,10 +584,10 @@ const Contact = () => {
               </motion.div>
 
               {/* CTA Card */}
-              {/* <motion.div
+              <motion.div
                 variants={itemVariants}
                 whileHover="hover"
-                className="bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-xl md:rounded-2xl p-6 md:p-8 shadow-xl focus-within:ring-4 focus-within:ring-blue-300"
+                className="bg-gradient-to-br from-teal-500 to-blue-600 text-white rounded-2xl p-6 md:p-8 shadow-xl focus-within:ring-4 focus-within:ring-blue-300/50"
                 tabIndex={0}
               >
                 <div className="text-center">
@@ -593,14 +601,14 @@ const Contact = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => handleContactClick('call')}
-                    className="bg-white text-blue-600 px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-blue-50 transition-colors flex items-center mx-auto shadow-lg text-sm md:text-base focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50"
+                    className="bg-white text-blue-600 px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-blue-50 transition-all flex items-center mx-auto shadow-lg text-sm md:text-base focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50"
                     aria-label={currentContent.contactNow}
                   >
                     {currentContent.contactNow}
                     <ContactIcons.Arrow className={`h-4 md:h-5 w-4 md:w-5 ${isArabic ? 'mr-2 rotate-180' : 'ml-2'}`} />
                   </motion.button>
                 </div>
-              </motion.div> */}
+              </motion.div>
             </div>
           </motion.div>
         </div>

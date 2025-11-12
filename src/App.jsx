@@ -15,6 +15,7 @@ const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const Contact = lazy(() => import('./pages/Contact'));
 const PriceRequest = lazy(() => import('./pages/PriceRequest'));
 const Services = lazy(() => import('./pages/Services'));
+const ClientsSection = lazy(() => import('./components/ClientsSection'));
 
 // مكون لتحسين تجربة التحميل
 const OptimizedSuspense = ({ children }) => (
@@ -79,6 +80,11 @@ function App() {
               <Route path="/contact" element={
                 <OptimizedSuspense>
                   <Contact />
+                </OptimizedSuspense>
+              } />
+              <Route path="/ClientsSection" element={
+                <OptimizedSuspense>
+                  <ClientsSection />
                 </OptimizedSuspense>
               } />
               <Route path="/price-request" element={

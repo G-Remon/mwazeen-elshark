@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, memo, lazy, Suspense } from 'react';
+import React, { useState, useMemo, useCallback, memo, lazy, Suspense, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
@@ -20,9 +20,36 @@ const ProjectCardPlaceholder = () => (
   </div>
 );
 
+// Enhanced Simple Title Card Component for new categories
+const SimpleProjectCard = memo(({ title, isArabic, index }) => (
+  <div 
+    className="
+      bg-white
+      rounded-xl shadow-md hover:shadow-lg 
+      border border-gray-200
+      p-6 text-center 
+      hover:scale-105 transition-transform duration-300 
+      opacity-0 translate-y-6 animate-fade-in-up
+      cursor-pointer
+    "
+    style={{ animationDelay: `${index * 0.1}s` }}
+  >
+    <h3 className={`text-lg font-semibold text-gray-800 ${isArabic ? 'text-right' : 'text-left'}`}>
+      {title}
+    </h3>
+  </div>
+));
+
 const Projects = () => {
   const [filter, setFilter] = useState('all');
-  const { language, isArabic } = useLanguage();
+  const { language, isArabic, setLanguage } = useLanguage();
+
+  // Language switch handler with localStorage persistence
+  const handleLanguageToggle = useCallback(() => {
+    const newLanguage = language === 'ar' ? 'en' : 'ar';
+    setLanguage(newLanguage);
+    localStorage.setItem('preferred-language', newLanguage);
+  }, [language, setLanguage]);
 
   // محتوى متعدد اللغات - محسنة للذاكرة
   const content = useMemo(() => ({
@@ -41,7 +68,9 @@ const Projects = () => {
         { key: 'all', label: 'جميع المشاريع' },
         { key: 'سكني', label: 'سكني' },
         { key: 'تجاري', label: 'تجاري' },
-        { key: 'ديني', label: 'ديني' }
+        { key: 'ديني', label: 'ديني' },
+        { key: 'التطوير العقاري', label: 'التطوير العقاري' },
+        { key: 'المقاولات', label: 'المقاولات' }
       ]
     },
     en: {
@@ -59,7 +88,9 @@ const Projects = () => {
         { key: 'all', label: 'All Projects' },
         { key: 'سكني', label: 'Residential' },
         { key: 'تجاري', label: 'Commercial' },
-        { key: 'ديني', label: 'Religious' }
+        { key: 'ديني', label: 'Religious' },
+        { key: 'التطوير العقاري', label: 'Real Estate Development' },
+        { key: 'المقاولات', label: 'Contracting' }
       ]
     }
   }), []);
@@ -71,6 +102,144 @@ const Projects = () => {
     setFilter(filterKey);
   }, []);
 
+  // Static projects for the new categories (title only)
+  const newCategoryProjects = useMemo(() => [
+    // التطوير العقاري - Real Estate Development
+    {
+      id: 100,
+      title: {
+        ar: 'مشروع فلل بحيرة النورس',
+        en: 'Falell Lake Seagull Project'
+      },
+      type: {
+        ar: 'التطوير العقاري',
+        en: 'Real Estate Development'
+      },
+      isSimpleCard: true
+    },
+    {
+      id: 101,
+      title: {
+        ar: 'مشروع فلل حي الجسر',
+        en: 'Al-Jisr District Villas Project'
+      },
+      type: {
+        ar: 'التطوير العقاري',
+        en: 'Real Estate Development'
+      },
+      isSimpleCard: true
+    },
+    {
+      id: 102,
+      title: {
+        ar: 'مشروع فلل حي العزيزية',
+        en: 'Al-Aziziyah District Villas Project'
+      },
+      type: {
+        ar: 'التطوير العقاري',
+        en: 'Real Estate Development'
+      },
+      isSimpleCard: true
+    },
+    {
+      id: 103,
+      title: {
+        ar: 'مشروع فلل حي التحلية',
+        en: 'Al-Tahliyah District Villas Project'
+      },
+      type: {
+        ar: 'التطوير العقاري',
+        en: 'Real Estate Development'
+      },
+      isSimpleCard: true
+    },
+    // المقاولات - Contracting
+    {
+      id: 200,
+      title: {
+        ar: 'مشروع انشاء قصر حي الحزام الذهبي',
+        en: 'Golden Belt District Palace Construction Project'
+      },
+      type: {
+        ar: 'المقاولات',
+        en: 'Contracting'
+      },
+      isSimpleCard: true
+    },
+    {
+      id: 201,
+      title: {
+        ar: 'مشروع انشاء مجالس حي الراكة',
+        en: 'Al-Rakah District Majlis Construction Project'
+      },
+      type: {
+        ar: 'المقاولات',
+        en: 'Contracting'
+      },
+      isSimpleCard: true
+    },
+    {
+      id: 202,
+      title: {
+        ar: 'مشروع عمارة تجارية بالرحبة الخبر',
+        en: 'Commercial Building Project in Al-Rahba, Khobar'
+      },
+      type: {
+        ar: 'المقاولات',
+        en: 'Contracting'
+      },
+      isSimpleCard: true
+    },
+    {
+      id: 203,
+      title: {
+        ar: 'مشروع الحمد بالعزيزية',
+        en: 'Al-Hamad Project in Al-Aziziyah'
+      },
+      type: {
+        ar: 'المقاولات',
+        en: 'Contracting'
+      },
+      isSimpleCard: true
+    },
+    {
+      id: 204,
+      title: {
+        ar: 'مشروع انشاء فلل حي البحيرة النورس',
+        en: 'Villas Construction Project in Al-Buhaira Al-Nours District'
+      },
+      type: {
+        ar: 'المقاولات',
+        en: 'Contracting'
+      },
+      isSimpleCard: true
+    },
+    {
+      id: 205,
+      title: {
+        ar: 'مشروع العتيبي الصواري',
+        en: 'Al-Otaibi Al-Sawari Project'
+      },
+      type: {
+        ar: 'المقاولات',
+        en: 'Contracting'
+      },
+      isSimpleCard: true
+    },
+    {
+      id: 206,
+      title: {
+        ar: 'مشروع 2 فيلا حي العقربية',
+        en: '2 Villas Project in Al-Uqrabiyah District'
+      },
+      type: {
+        ar: 'المقاولات',
+        en: 'Contracting'
+      },
+      isSimpleCard: true
+    }
+  ], []);
+
   // Dynamic import للمشاريع - يتم تحميلها فقط عند الحاجة
   const [localizedProjects, setLocalizedProjects] = useState([]);
   const [projectsLoaded, setProjectsLoaded] = useState(false);
@@ -79,22 +248,42 @@ const Projects = () => {
     // تحميل بيانات المشاريع بشكل غير متزامن
     import('../data/ProjectData.js')
       .then(({ projectsData }) => {
-        const processedProjects = projectsData.map(project => ({
-          ...project,
-          title: project.title[language],
-          description: project.description[language],
-          location: project.location[language],
-          type: project.type[language],
-          status: project.status[language],
-          image: project.images?.[0]?.src || '/assets/projects/default.webp'
-        }));
+        const allProjects = [...projectsData, ...newCategoryProjects];
+        const processedProjects = allProjects.map(project => {
+          if (project.isSimpleCard) {
+            // For simple title cards, only process title and type
+            return {
+              ...project,
+              title: project.title[language],
+              type: project.type[language]
+            };
+          } else {
+            // For existing projects, process all fields
+            return {
+              ...project,
+              title: project.title[language],
+              description: project.description[language],
+              location: project.location[language],
+              type: project.type[language],
+              status: project.status[language],
+              image: project.images?.[0]?.src || '/assets/projects/default.webp'
+            };
+          }
+        });
         setLocalizedProjects(processedProjects);
         setProjectsLoaded(true);
       })
       .catch(() => {
+        // If import fails, use new category projects only
+        const processedProjects = newCategoryProjects.map(project => ({
+          ...project,
+          title: project.title[language],
+          type: project.type[language]
+        }));
+        setLocalizedProjects(processedProjects);
         setProjectsLoaded(true);
       });
-  }, [language]);
+  }, [language, newCategoryProjects]);
 
   // استخدام useMemo للفلترة
   const filteredProjects = useMemo(() => {
@@ -161,6 +350,40 @@ const Projects = () => {
     }
   };
 
+  // Enhanced Clients data with improved styling
+  const clientsData = useMemo(() => [
+    {
+      name: {
+        ar: 'شركة المعمار العربي للمقاولات',
+        en: 'Al-Memar Al-Arabi Contracting Company'
+      }
+    },
+    {
+      name: {
+        ar: 'شركة باني للمقاولات',
+        en: 'Bani Contracting Company'
+      }
+    },
+    {
+      name: {
+        ar: 'شركة بني الخليج',
+        en: 'Bani Al-Khaleej Company'
+      }
+    },
+    {
+      name: {
+        ar: 'شركة عبر للمقاولات',
+        en: 'Abir Contracting Company'
+      }
+    },
+    {
+      name: {
+        ar: 'شركة المحيط الذهبي',
+        en: 'Al-Mohit Al-Thahabi Company'
+      }
+    }
+  ], []);
+
   // Structured Data for SEO
   const structuredData = useMemo(() => ({
     '@context': 'https://schema.org',
@@ -185,10 +408,27 @@ const Projects = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8 md:py-12"
+      className="min-h-screen bg-white py-8 md:py-12"
       itemScope
       itemType="https://schema.org/ItemList"
     >
+      {/* Enhanced CSS for animations */}
+      <style jsx>{`
+        @keyframes fade-in-up {
+          from { 
+            opacity: 0; 
+            transform: translateY(12px); 
+          }
+          to { 
+            opacity: 1; 
+            transform: translateY(0); 
+          }
+        }
+        .animate-fade-in-up {
+          animation: fade-in-up 0.6s ease-out forwards;
+        }
+      `}</style>
+
       {/* Structured Data for SEO */}
       <script type="application/ld+json">
         {JSON.stringify(structuredData)}
@@ -196,21 +436,33 @@ const Projects = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* الهيدر الرئيسي */}
+        {/* Language Switch Button */}
+        <div className="flex justify-end mb-6">
+          <button 
+            onClick={handleLanguageToggle}
+            className="px-3 py-1 rounded-full border border-gray-300 text-sm hover:bg-gray-100 transition-colors duration-200 font-medium text-gray-700"
+            aria-label={language === 'ar' ? 'Switch to English' : 'التغيير إلى العربية'}
+          >
+            {language === 'ar' ? 'EN' : 'AR'}
+          </button>
+        </div>
+
+        {/* Enhanced الهيدر الرئيسي */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-16 md:mb-24"
           role="banner"
           aria-labelledby="projects-title"
         >
           <h1
             id="projects-title"
-            className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6"
+            className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-4 md:mb-6"
             itemProp="name"
           >
             {currentContent.title}
+            <div className="after:block after:w-16 after:h-[3px] after:bg-blue-600 after:mt-2 after:mx-auto"></div>
           </h1>
           <p
             className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
@@ -225,7 +477,7 @@ const Projects = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 md:mb-12"
+          className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12 md:mb-16"
           role="navigation"
           aria-label={language === 'ar' ? 'تصفية المشاريع' : 'Projects Filter'}
         >
@@ -247,13 +499,13 @@ const Projects = () => {
           ))}
         </motion.div>
 
-        {/* شبكة المشاريع */}
+        {/* Enhanced شبكة المشاريع */}
         <motion.div
           layout
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 md:mb-24"
           role="main"
           aria-label={language === 'ar' ? 'قائمة المشاريع' : 'Projects List'}
         >
@@ -272,18 +524,28 @@ const Projects = () => {
                 itemScope
                 itemType="https://schema.org/CreativeWork"
               >
-                <Link
-                  to={`/projects/${project.id}`}
-                  className="block transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-200 rounded-2xl"
-                  aria-label={`${language === 'ar' ? 'عرض تفاصيل' : 'View details for'} ${project.title}`}
-                  prefetch="intent"
-                >
-                  <ProjectCard
-                    project={project}
-                    currency={isArabic ? 'ريال' : 'SAR'}
-                    loading={index < 3 ? "eager" : "lazy"}
+                {project.isSimpleCard ? (
+                  // Enhanced simple title-only card for new categories
+                  <SimpleProjectCard 
+                    title={project.title} 
+                    isArabic={isArabic}
+                    index={index}
                   />
-                </Link>
+                ) : (
+                  // Existing detailed project card with link
+                  <Link
+                    to={`/projects/${project.id}`}
+                    className="block transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-200 rounded-2xl"
+                    aria-label={`${language === 'ar' ? 'عرض تفاصيل' : 'View details for'} ${project.title}`}
+                    prefetch="intent"
+                  >
+                    <ProjectCard
+                      project={project}
+                      currency={isArabic ? 'ريال' : 'SAR'}
+                      loading={index < 3 ? "eager" : "lazy"}
+                    />
+                  </Link>
+                )}
               </motion.div>
             ))}
           </Suspense>
@@ -294,7 +556,7 @@ const Projects = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-12 md:py-16"
+            className="text-center py-16 md:py-24"
             role="status"
             aria-live="polite"
           >
@@ -308,55 +570,19 @@ const Projects = () => {
           </motion.div>
         )}
 
-        {/* إحصائيات المشاريع */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          className="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl"
-          aria-labelledby="projects-stats-heading"
-        >
-          <h2 id="projects-stats-heading" className="sr-only">
-            {language === 'ar' ? 'إحصائيات المشاريع' : 'Projects Statistics'}
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
-            {[
-              { value: localizedProjects.length, label: currentContent.stats.total },
-              { value: projectStats.completed, label: currentContent.stats.completed },
-              { value: projectStats.ongoing, label: currentContent.stats.ongoing },
-              { value: "100%", label: currentContent.stats.delivery }
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                variants={statsVariants}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 0.7 + index * 0.1, duration: 0.5 }}
-                className="p-3 md:p-4"
-              >
-                <div
-                  className="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2"
-                  aria-label={stat.value}
-                >
-                  {stat.value}
-                </div>
-                <div className="text-blue-100 text-sm md:text-base">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
 
-        {/* دعوة للاتصال */}
+        {/* Enhanced دعوة للاتصال */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.6 }}
-          className="text-center mt-12 md:mt-16"
+          className="text-center mt-16 md:mt-24"
           role="complementary"
           aria-labelledby="cta-heading"
         >
-          <h3 id="cta-heading" className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 md:mb-4">
+          <h3 id="cta-heading" className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-gray-900 mb-3 md:mb-4">
             {language === 'ar' ? 'هل لديك مشروع في mind؟' : 'Have a project in mind?'}
+            <div className="after:block after:w-16 after:h-[3px] after:bg-blue-600 after:mt-2 after:mx-auto"></div>
           </h3>
           <p className="text-gray-600 mb-4 md:mb-6 text-base md:text-lg">
             {language === 'ar'
