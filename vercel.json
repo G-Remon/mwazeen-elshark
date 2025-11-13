@@ -59,5 +59,18 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "mawazin-alsharq.com"
+        }
+      ],
+      "destination": "https://www.mawazin-alsharq.com/$1",
+      "permanent": true
+    }
   ]
 }
