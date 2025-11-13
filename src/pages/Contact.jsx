@@ -39,6 +39,11 @@ const ContactIcons = {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
   )),
+  Website: memo((props) => (
+    <svg {...props} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9m0 9c-5 0-9-4-9-9s4-9 9-9" />
+    </svg>
+  )),
   WhatsApp: memo((props) => (
     <svg {...props} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893 0-3.189-1.248-6.189-3.515-8.464" />
@@ -47,6 +52,11 @@ const ContactIcons = {
   Arrow: memo((props) => (
     <svg {...props} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+    </svg>
+  )),
+  ExternalLink: memo((props) => (
+    <svg {...props} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
     </svg>
   ))
 };
@@ -76,7 +86,8 @@ const Contact = () => {
       directCall: "اتصال مباشر",
       whatsapp: "مراسلة واتساب",
       phone: "هاتف",
-      email: "بريد إلكتروني",
+      website: "الموقع الإلكتروني",
+      visitWebsite: "زيارة الموقع",
       mainOffice: "المقر الرئيسي",
       branch: "فرع الخبر",
       workDays: {
@@ -112,7 +123,8 @@ const Contact = () => {
       directCall: "Direct Call",
       whatsapp: "WhatsApp Message",
       phone: "Phone",
-      email: "Email",
+      website: "Website",
+      visitWebsite: "Visit Website",
       mainOffice: "Headquarters",
       branch: "Al Khobar Branch",
       workDays: {
@@ -145,7 +157,7 @@ const Contact = () => {
   // استخدام useCallback لمعالجة الاتصالات
   const handleContactClick = useCallback((type) => {
     const phoneNumber = '+966558002061';
-    const email = 'mawazin-alsharq.com ';
+    const websiteUrl = 'https://mawazin-alsharq.com';
 
     switch (type) {
       case 'call':
@@ -157,8 +169,8 @@ const Contact = () => {
           : 'Hello, I would like to inquire about Mawazin Al-Sharq Real Estate services';
         window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
         break;
-      case 'email':
-        window.open(`mailto:${email}`, '_self');
+      case 'website':
+        window.open(websiteUrl, '_blank');
         break;
       default:
         break;
@@ -241,7 +253,7 @@ const Contact = () => {
       '@type': 'Organization',
       name: 'موازين الشرق للمقاولات العامة',
       telephone: '+966558002061',
-      email: 'mawazin-alsharq.com',
+      url: 'https://mawazin-alsharq.com',
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'حي المروج',
@@ -366,27 +378,27 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  {/* Email Section */}
+                  {/* Website Section */}
                   <div className={`flex items-start ${isArabic ? 'flex-row-reverse' : ''}`}>
-                    <div className={`bg-blue-50 p-2 md:p-3 rounded-lg ${isArabic ? 'ml-3 md:ml-4' : 'mr-3 md:mr-4'} flex-shrink-0`}>
-                      <ContactIcons.Email className="h-5 md:h-6 w-5 md:w-6 text-blue-600" />
+                    <div className={`bg-purple-50 p-2 md:p-3 rounded-lg ${isArabic ? 'ml-3 md:ml-4' : 'mr-3 md:mr-4'} flex-shrink-0`}>
+                      <ContactIcons.Website className="h-5 md:h-6 w-5 md:w-6 text-purple-600" />
                     </div>
                     <div className="flex-1">
                       <h3 className="font-semibold text-gray-900 text-base md:text-lg mb-1 md:mb-2">
-                        {currentContent.email}
+                        {currentContent.website}
                       </h3>
-                      <p className="text-gray-800 text-lg md:text-xl font-bold mb-3 md:mb-4" itemProp="email">
-                      mawazin-alsharq.com
+                      <p className="text-gray-800 text-lg md:text-xl font-bold mb-3 md:mb-4" itemProp="url">
+                        mawazin-alsharq.com
                       </p>
                       <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        onClick={() => handleContactClick('email')}
-                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg transition-all font-medium flex items-center shadow-md text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-300"
-                        aria-label={language === 'ar' ? 'إرسال بريد إلكتروني' : 'Send Email'}
+                        onClick={() => handleContactClick('website')}
+                        className="bg-purple-500 hover:bg-purple-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg transition-all font-medium flex items-center shadow-md text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-purple-300"
+                        aria-label={currentContent.visitWebsite}
                       >
-                        <ContactIcons.Email className="h-4 md:h-5 w-4 md:w-5 mr-1 md:mr-2" />
-                        {language === 'ar' ? 'إرسال بريد' : 'Send Email'}
+                        <ContactIcons.ExternalLink className="h-4 md:h-5 w-4 md:w-5 mr-1 md:mr-2" />
+                        {currentContent.visitWebsite}
                       </motion.button>
                     </div>
                   </div>
@@ -584,7 +596,7 @@ const Contact = () => {
               </motion.div>
 
               {/* CTA Card */}
-              <motion.div
+              {/* <motion.div
                 variants={itemVariants}
                 whileHover="hover"
                 className="bg-gradient-to-br from-teal-500 to-blue-600 text-white rounded-2xl p-6 md:p-8 shadow-xl focus-within:ring-4 focus-within:ring-blue-300/50"
@@ -608,7 +620,7 @@ const Contact = () => {
                     <ContactIcons.Arrow className={`h-4 md:h-5 w-4 md:w-5 ${isArabic ? 'mr-2 rotate-180' : 'ml-2'}`} />
                   </motion.button>
                 </div>
-              </motion.div>
+              </motion.div> */}
             </div>
           </motion.div>
         </div>
